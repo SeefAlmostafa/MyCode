@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int arr[3][3]=
+    {
+    {1,2,3},
+    {4,5,6},
+    {7,8,9}
+    };
+    int Zeile=sizeof(arr)/sizeof(arr[0]);
+    int Spalte=sizeof(arr[0])/sizeof(Zeile);
+    // int n=Spalte*Zeile;
+    for(int i=0;i<Spalte;i++){
+        printf("\n");
+        for(int j=0;j<Zeile;j++)
+        printf("%d\t",**(arr+i)+j); //  **(arr+i)+j ==  arr[i][j]
+}
+    /*
+    for(int i=0;i<Zeile;i++){
+        for(int j=0;j<Spalte;j++)
+        printf("%d\n",arr[i][j]);
+    }
+        for(int i=0;i<n;i++)
+        printf("%d\n",**arr+i);
+    */
+}
+__________________________________________________________________________________________________
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int rows=0;
+    printf("Enter the rows:");
+    scanf("%d",&rows);
+    char c='A';
+    for( int i=1;i<=rows;i++){
+        for( int j=1;j<=i;j++){
+            printf("%c ",c);
+        }
+        c++;
+        printf("\n");
+    }
+    return 0;
+}
+_______________________________________________________________________________________________________
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int zeile=0;
+    zeile=10;
+    // int n=Spalte*Zeile;
+    for( int i=1;i<=zeile;i++){
+        for( int j=1;j<=i;j++){
+            printf("* ");
+        }
+        printf("\n");
+    }
+    return 0;
+}
+___________________________________________________________________________________________________________
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int rows=0;
+    printf("Enter the rows:");
+    scanf("%d",&rows);
+    for(int i=1;i<=rows;i++){
+        for( int j=1;j<=i;j++){
+            printf("%d ",j);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+____________________________________________________________________________________________________________
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int rows=0;
+    printf("Enter the rows:");
+    scanf("%d",&rows);
+    for( int i=rows;i>=1;i--){
+        for( int j=1;j<=i;j++){
+            printf("%c ",'A'-1+i);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+_______________________________________________________________________________________________________________
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int rows=0;
+    printf("Enter the rows:");
+    scanf("%d",&rows);
+    for( int i=1;i<=rows;i++){
+        for( int j=1;j<=i;j++){
+            printf("%c ",'A'+j-1);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+__________________________________________________________________________________________________________________
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int rows=0;
+    printf("Enter the rows:");
+    scanf("%d",&rows);
+    for( int i=rows;i>=1;i--){
+        for( int j=1;j<=i;j++){
+            printf("%c ",'A'+i-1);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+___________________________________________________________________________________________________________________
