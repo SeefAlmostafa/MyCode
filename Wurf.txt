@@ -1,0 +1,15 @@
+#include <stdlib.h>
+#include <time.h>
+
+void wurf(int,int);
+int main(){
+  wurf(3,6);
+}
+
+void wurf(int wurf,int n){
+    srand(time(NULL));
+    for(int i=1;i<=wurf;i++){
+        int zufall= (rand()%n+1);
+        printf("Wuerfel [%d]: %d\n",i,zufall);
+    }
+}
