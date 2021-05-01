@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+// linked list
+typedef struct Element Element;
+struct Element{
+int number;
+Element *next;
+};
+typedef struct {
+Element *first;
+}List;
+
+List* initialization();
+void insertion (List*,int );
+void displayMylist (List*);
+
+int main()
+{
+    List *Mylist;
+    Mylist=initialization();
+    insertion(Mylist,1);
+    insertion(Mylist,2);
+    insertion(Mylist,3);
+    insertion(Mylist,4);
+    displayMylist(Mylist);
+
+}
+
+List* initialization(){
+List *list=malloc(sizeof(*list));
+Element *element=malloc(sizeof(*element));
+if(list==NULL || element==NULL){
+    printf("Failed");
+    exit(0);
+
+}
+element->number=0;
+element->next=NULL;
+list->first=element;
+return list;
+}
+void insertion (List* list,int number ){
+    Element* neu=malloc(sizeof(*neu));
+    if(neu==NULL){
+        exit(0);
+    }
+    neu->number=number;
+    neu->next=list->first;
+    list->first=neu;
+}
+void displayMylist (List* list){
+if(list==NULL){
+    exit(0);
+}
+Element* current=list->first;
+while(current!=NULL){
+    printf("%d ->",current->number);
+    current=current->next;
+}
+printf("NULL\n");
+
+
+
+}
