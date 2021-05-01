@@ -1,0 +1,24 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+
+    char* stringcat(char*,const char*);
+    int main(){
+
+    char text1[10]="Hallo";
+    char text2[5]="seef";
+    stringcat(text1,text2);
+    printf("text1=%s\ntext2=%s",text1,text2);
+    }
+
+   char* stringcat(char* text1,const char* text2){
+       int i,j;
+        for( i=0;text1[i]!='\0';i++);
+        for( j=0;text2[j]!='\0';j++){
+             text1[i+j]=text2[j];
+        }
+        text1[i+j]='\0';
+
+        return text1;
+    }
+

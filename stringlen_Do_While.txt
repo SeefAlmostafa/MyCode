@@ -1,0 +1,22 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    int stringlen(const char*);
+    
+    int main(){
+    char name[]="SeefAlmostafa";
+    int result= stringlen(name);
+    printf("len=%d",result);
+    }
+
+    int stringlen(const char* string ){
+    char Buchstabe=0;
+    int counter=0;
+    do{
+        Buchstabe=string[counter];
+        counter++;
+      }
+    while(Buchstabe!='\0');
+    counter--;
+    return counter;
+    }

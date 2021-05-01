@@ -1,0 +1,29 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+
+int strincmp (const char*,const char*);
+int main(){
+    char text1[10]="Hallo";
+    char text2[10]="Hallo";
+    int result=strincmp(text1,text2);
+    if (result==0){
+        printf("yes,result=%d",result);
+    }
+    else{
+        printf("No,result=%d",result);
+    }
+}
+
+int  strincmp(const char* text1,const char* text2){
+    int i=0;
+    while(text1[i]!='\0' || text2[i]!='\0'){
+        if(text1[i]>text2[i])
+            return 1;
+        if(text2[i]>text1[i])
+            return -1;
+
+        i++;
+    }
+    return 0;
+}

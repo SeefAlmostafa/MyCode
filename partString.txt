@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+char* stringchr(char* string,char characterToFind);
+int main(){
+char* restOfString;
+char* string ="test Text";
+restOfString=stringchr(string,'s');
+if(restOfString!= NULL){
+    printf("%s",restOfString);
+}
+
+}
+
+char* stringchr(char* string,char characterToFind){
+    char* restOfString=NULL;
+for(int i=0;string[i]!='\0';i++){
+        if(characterToFind== characterToFind){
+            restOfString = &string[i];
+
+        }
+}
+ return restOfString;
+
+}

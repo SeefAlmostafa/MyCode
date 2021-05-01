@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char* stringpbrk(const char*,const char*);
+
+int main(){
+    char *str=NULL;
+    char name[20]="Text test";
+    str=stringpbrk(name,"xes");
+    if(str!=NULL)
+        printf("%s",str);
+}
+
+char* stringpbrk(const char* s1,const char* s2){
+
+    int i,j,flag=0,pos;
+
+    // set the length of s1 in pos
+    for( i=0;s1[i]!='\0';i++);
+    pos=i;
+    // compare s1,s2 and j and pos
+    for( i=0;s2[i]!='\0';i++){
+        for( j=0;s1[j]!='\0';j++){
+            if(s1[j]==s2[i]&& j<=pos){
+                pos=j;
+                flag=1;
+            }
+        }
+    }
+    char* ptr=&s1[pos];
+
+    // return ptr where flag=1
+    if(flag==1){
+        return ptr;
+    }
+    else{
+        return NULL;
+    }
+}

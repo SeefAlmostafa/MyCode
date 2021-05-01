@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char* stringstr(const char*,const char*);
+
+int main(){
+    char *str=NULL;
+    char name[]="Almostafa seef hallo";
+    str=stringstr(name,"seef");
+    if(str!=NULL)
+        printf("%s",str);
+    else
+        printf("No Match!");
+}
+
+char* stringstr( const char* text,const char* target)
+{
+    // 1 is there a matching word?
+    int i=0;
+    int j=0;
+    int targetLength = strlen(target);
+    while(text[i]!='\0' && target[j]!='\0') {
+        if(text[i]!=target[j]) {
+            i++;
+            j=0;
+        } else {
+            if(j == targetLength-1) {
+                char* ptr = &text[i+1-targetLength];
+                return ptr;
+            }
+            i++;
+            j++;
+        }
+    }
+    return NULL;
+}

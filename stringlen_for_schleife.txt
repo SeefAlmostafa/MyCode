@@ -1,0 +1,18 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    int stringlen(const char*);
+
+    int main(){
+    char name[]="Seef";
+    int result= stringlen(name);
+    printf("len=%d",result);
+    }
+
+    int stringlen(const char* string ){
+    int counter=0;
+    for(int i=0;string[i]!='\0';i++){
+        counter++;
+    }
+    return counter;
+    }
