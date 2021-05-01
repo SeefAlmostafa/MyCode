@@ -1,0 +1,13 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(void){
+int* recieveMemory=NULL;
+recieveMemory= malloc(sizeof(int));
+if(recieveMemory==NULL){
+    exit(-1);
+}
+*recieveMemory=3;
+printf("%d",*recieveMemory);
+return 0;
+}

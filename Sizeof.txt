@@ -1,0 +1,13 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(void){
+   printf("int:%d bytes\n",sizeof(int));
+   printf("char:%d bytes\n",sizeof(char));
+   printf("double:%d bytes\n",sizeof(double));
+   printf("long:%d bytes\n",sizeof(long));
+   printf("short:%d bytes\n",sizeof(short));
+   printf("float:%d bytes\n",sizeof(float));
+   printf("unsigned int:%d bytes\n",sizeof(unsigned int));
+   printf("signed int:%d bytes",sizeof(signed int));
+}
