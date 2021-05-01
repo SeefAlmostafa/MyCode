@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+   int Width;
+   int length;
+}rectangle;
+
+typedef struct {
+   int x;
+   int y;
+   int *number1;
+}Position;
+
+typedef struct {
+   char Owner[100];
+   rectangle r;
+   Position P;
+   int *number2;
+
+}buldingPlan;
+
+
+int main(){
+
+    // Printing & Installing values into a struct
+     buldingPlan myHouse={"Seef Almostafa",{5,10},{20,15},NULL};
+     printf("****Installing values into a struct****\n");
+     printf("The owner name:%s\nwidth:%d\nlength:%d\nx:%d\ny:%d\n",
+            myHouse.Owner,
+            myHouse.r.Width,
+            myHouse.r.length,
+            myHouse.P.x,
+            myHouse.P.y);
+
+
+    // Using Pointer with structs
+    buldingPlan *structPointer=&myHouse;
+    int z=20;
+    Position p1;
+    p1.number1=&z; // We print here with & because the pointer is pointing to a normal var
+
+    myHouse.number2 = (p1.number1);// We print here with * because the pointer is pointing to a pointer
+    printf("number2:%d\nnumber1:%d",*(myHouse.number2),*(p1.number1));
+
+}

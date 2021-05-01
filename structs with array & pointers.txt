@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+   int Width;
+   int length;
+}rectangle;
+
+typedef struct {
+   int x;
+   int y;
+
+}Position;
+
+typedef struct {
+   char Owner[100];
+   rectangle r;
+   Position P;
+
+}buldingPlan;
+
+
+int main(){
+
+    // Printing & Installing values into a struct
+     buldingPlan myHouse={"Seef Almostafa",{5,10},{20,15}};
+     printf("****Installing values into a struct****\n");
+     printf("The owner name:%s\nwidth:%d\nlength:%d\nx:%d\ny:%d\n",
+            myHouse.Owner,
+            myHouse.r.Width,
+            myHouse.r.length,
+            myHouse.P.x,
+            myHouse.P.y);
+
+     // Using Array with structs
+    int size=5;
+    Position path[]={{0,1},{2,3},{1,2},{3,4},{4,5}};
+    printf("****Using Array with structs****\n");
+    for(int i=0;i<size;i++)
+        printf("{%d,%d}\n",path[i].x,path[i].y);
+
+
+    // Using Pointer with structs
+    buldingPlan *structPointer=&myHouse;
+    printf("****Using Pointer with structs****\n");
+    printf("x:%d\ny:%d",structPointer->P.x,structPointer->P.x);
+
+}

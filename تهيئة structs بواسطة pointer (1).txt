@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct cordinate{
+int x;
+int y;
+}cordinate;
+void corptr(cordinate*);
+
+int main(){
+cordinate mypoint;
+corptr(&mypoint);
+printf("%d\n",mypoint.x);
+printf("%d",mypoint.y);
+}
+
+void corptr(cordinate* pointer){
+    (*pointer).x=0;
+    (*pointer).y=0;
+}

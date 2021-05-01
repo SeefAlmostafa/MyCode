@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define RUN_TIMES 2
+typedef struct player{
+    char Sex[200];
+    char FirstName[200];
+    char LastName[200];
+    int score;
+    int age;
+    char game[200];
+}player;
+
+
+int main()
+{
+  player player[RUN_TIMES];
+  for(int i=0;i<RUN_TIMES;i++){
+    printf("Are you Female Or Male player%d:",i+1);
+    scanf("%s",&player[i].Sex);
+    printf("What is your FirstName player%d:",i+1);
+    scanf("%s",&player[i].FirstName);
+    printf("What is your LastName player%d:",i+1);
+    scanf("%s",&player[i].LastName);
+    printf("What is Your score player%d:",i+1);
+    scanf("%d",&player[i].score);
+    printf("What is Your age player%d:",i+1);
+    scanf("%d",&player[i].age);
+    printf("What is your game player%d:",i+1);
+    scanf("%s",&player[i].game);
+    printf("\n");
+
+  }
+  for(int j=0;j<RUN_TIMES;j+a+){
+    printf("Player[%d] Is a %s\n",j+1,player[j].Sex);
+    printf("Player[%d] FirstName:%s\n",j+1,player[j].FirstName);
+    printf("Player[%d] LastName:%s\n",j+1,player[j].LastName);
+    printf("Player[%d] Score:%d\n",j+1,player[j].score);
+    printf("Player[%d] Age:%d\n",j+1,player[j].age);
+    printf("Player[%d] Game:%s\n",j+1,player[j].game);
+
+  }
+}

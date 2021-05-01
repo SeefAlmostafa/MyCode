@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct {
+    int x;
+    int y;
+}swap;
+
+void swapFunction(swap*);
+
+int main(){
+    swap erg;
+    printf("Enetr x:");
+    scanf("%d",&erg.x);
+    printf("Enetr y:");
+    scanf("%d",&erg.y);
+    swapFunction(&erg);
+    printf("x:%d\ny:%d",erg.x,erg.y);
+
+}
+void swapFunction(swap* s){
+    int temp;
+    temp = s->x;
+    s->x=s->y;
+    s->y=temp;
+
+}
