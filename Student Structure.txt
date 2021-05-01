@@ -1,0 +1,44 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+struct Datum{
+    int tag;
+    int monat;
+    int jahr;
+} ;
+struct Student{
+    char vorname[51];
+    char nachName[51];
+    int matr;
+    int plz;
+    struct Datum geburtsdatum;
+    int note[10];
+};
+struct Student createStudent();
+void printStudent();
+
+int main(){
+    struct Student student1={"Max","Mustermann",32233,32423,{24,5,2001}};
+    struct Student student2={"Luke","TestMan",233,423,{14,2,2011}};
+    student1=createStudent();
+    student2=createStudent();
+    printStudent(student1);
+    printStudent(student2);
+}
+struct Student createStudent(){
+    struct Student neu;
+    printf("Dein Vorname?:");
+    scanf("%50s",neu.vorname);
+    printf("Dein Nachname?:");
+    scanf("%50s",neu.nachName);
+    printf("Dein Matr?:");
+    scanf("%d",&neu.matr);
+    return neu;
+}
+void printStudent(struct Student student){
+printf("\n****result****\n");
+printf("%s\n",student.vorname);
+printf("%s\n",student.nachName);
+printf("%d\n",student.matr);
+}
