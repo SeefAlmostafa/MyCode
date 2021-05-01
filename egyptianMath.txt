@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int egyptianMath(int,int);
+
+int main()
+{
+    int rightNumber=0,leftNumber=0;
+    printf("Enter the first number:");
+    scanf("%d",&leftNumber);
+    printf("Enter the second number:");
+    scanf("%d",&rightNumber);
+    int result=egyptianMath(leftNumber,rightNumber);
+    printf("Summe:%d",result);
+
+}
+int egyptianMath(int leftNumber,int rightNumber){
+
+    int summe=0;
+
+    for(int j=0;leftNumber>=1;j++){
+        if(leftNumber%2==1){
+            summe=summe+rightNumber;
+        }
+        leftNumber=leftNumber/2;
+        rightNumber=rightNumber*2;
+    }
+    return summe;
+}

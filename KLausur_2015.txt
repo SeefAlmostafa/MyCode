@@ -1,0 +1,258 @@
+(Aufgabe 1)(a)
+#include <stdio.h>
+#include <stdlib.h>
+int main(){
+  int i,y=4;
+  float j;
+  i=2+(y+4);
+  j=10-y++;
+  printf("i=%d\nj=%.2f",i,j);
+}
+_____________________________________
+i=10
+j=6.00
+_______________________________________________________________________________________
+(Aufgabe 1)(b)
+#include <stdio.h>
+#include <stdlib.h>
+float test(int i){
+int j=i%3;
+return j? 1.0/j:0.0;
+
+}
+int main(){
+float erg=test(8);
+float erg2=test(9);
+printf("%.2f\n%.2f",erg,erg2);
+}
+_______________________________________________________________________________________
+erg=0.50
+erg2=0.00
+_______________________________________________________________________________________
+(Aufgabe 1)(c)
+#include <stdio.h>
+#include <stdlib.h>
+int main(){
+if ((3+2==5) && (10/2<5))
+    return 1;
+else if (!(3+2==5) && (10%2<5))
+    return 1;
+else
+    return 0;
+}
+________________________________________________________________________________________
+0 wird zurückgegeben 
+________________________________________________________________________________________
+(Aufgabe 1)(d)
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main(){
+char str[]="Klausur";
+char *ptr=str+4;
+*(--ptr-1)='e';
+str[str>ptr]='B';
+ptr[0]='s';
+printf("%s",str);
+}
+________________________________________________________________________________________
+Ausgabe:Blessur
+________________________________________________________________________________________
+Aufgabe(2)(a-b)
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+void berechneZylinder(int,int,float*,float*);
+
+int main(){
+    float Mantelfaeche,Volume;
+    berechneZylinder(2,5,&Mantelfaeche,&Volume);
+    printf("%.2f\n%.2f",Mantelfaeche,Volume);
+}
+
+void berechneZylinder(int Durchmesser ,int hoehe,float *Mantelfaeche,float *Volume){
+    *Mantelfaeche =3.1514 * Durchmesser * hoehe;
+    *Volume= 3.1514 * pow((Durchmesser/2),2)* hoehe;
+}
+__________________________________________________________________________________________
+Mantelfaeche=31.51
+Volume=15.76
+___________________________________________________________________________________________
+Aufgabe(2)(d-g)
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+typedef struct ZylinderWerte{
+    float Mantelfaeche;
+    float Volume;
+}ZylinderWerte;
+
+ZylinderWerte berechneZylinder(int,int);
+
+int main(){
+    ZylinderWerte erg;
+    erg=berechneZylinder(2,5);
+    printf("%.2f\n%.2f",erg.Mantelfaeche,erg.Volume);
+}
+
+ZylinderWerte berechneZylinder(int Durchmesser,int hoehe){
+    ZylinderWerte result;
+    result.Mantelfaeche=3.1514 * Durchmesser * hoehe;
+    result.Volume=3.1514 * pow((Durchmesser/2),2)* hoehe;
+    return result;
+}
+_______________________________________________________________________________________________
+Mantelfaeche=31.51
+Volume=15.76
+________________________________________________________________________________________________
+(Aufgabe 3)(a)
+#1000	USB	str
+#1004	C	a
+#1008	#1004	ptr
+
+__________________________________________________________________________________________________
+(Aufgabe 3)(b)
+#1000	
+#1004	
+#1008	
+#1012
+#1016
+#1020
+#1024
+#1028
+__________________________________________________________________________________________________
+(Aufgabe 3)(c)
+Der code übershreibt str an der stelle [3] ,an dem es '\0' stehen sollte 
+Somit kann der ptr auf mehr character verweisen als er sollte. d.h der pointer zugreift stellen in der RAM ihm nicht gehören. 
+__________________________________________________________________________________________________
+(Aufgabe 4)
+a-(1) Falsch
+a-(2) Richtig  // Der Compiler kann sowas übersitzen
+b-(3) Richtig
+b-(4) Richtig  // Der Compiler kann sowas übersitzen
+c-(5) Falsch
+c-(6) Richtig
+d-(7) Richtig
+d-(8) Richtig
+e-(9) Richtig
+e-(10) Falsch
+________________________________________________________________________________________________
+(Aufgabe 5)
+#include <stdio.h>
+#include <stdlib.h>
+
+float  bestimmeDurchschnitt(int[],int);
+
+int main(){
+    int arr[]={3,6,13,27,1,8};
+    float mittelwert=bestimmeDurchschnitt(arr,6);
+    printf("Die Mittelwert beträgt %.2f",mittelwert);
+}
+
+float  bestimmeDurchschnitt(int arr[],int len){
+    int i;
+    float summe=0;
+    float mittelwert=0;
+    do{
+        summe=summe+arr[i];
+        i++;
+    }
+    while(i<len);
+    mittelwert=summe/len;
+    return mittelwert;
+}
+___________________________________________________________________________________________________
+(Aufgabe 5)(d)
+globale Variabl--> int arr[] 
+aber es ist nicht optimal 
+____________________________________________________________________________________________________
+(Aufgabe 6)
+#include <stdio.h>
+#include <stdlib.h>
+
+int geradeZahlen(int*,int,int);
+
+int main()
+{
+    int arr[3][5]={{3,5,17,2,1},
+                   {2,24,7,9,13},
+                   {7,2,14,30,9}};
+    int gerade=geradeZahlen(arr,3,5);
+    printf("Anzahl gerade Zahlen:%d",gerade);
+    return 0;
+}
+int geradeZahlen(int *a,int Zeilen,int Spalten){
+    int counter=0;
+    for(int i=0;i<Zeilen*Spalten;i++){
+        if(a[i]%2==0)
+        counter++;
+    }
+    return counter;
+}
+________________________________________________________________________________________________________
+(Aufgabe 7)(a)
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int i;
+  for(i=0;i<10;i++){
+    i=i+2;
+    printf("%d\n",i);
+  }
+}
+___________________________________________________________________________________________________________
+Ausgabe:
+2
+5
+8
+11
+_____________________________________________________________________________________________________________
+(Aufgabe 7)(b)
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int i;
+  for(i=0;i<10;i++){
+    printf("%d\n",i);
+  }
+}
+_______________________________________________________________________________________________________________
+(Aufgabe 7)(c)
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+int i;
+do{
+    i=i+2;
+    printf("%d\n",i);
+    i++;
+  }
+  while(i<10);
+}
+}
+_________________________________________________________________________________________________________________
+(Aufgabe 7)(d)
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+int i=1;
+while (i>0 && i%3!=0){
+    i=i+2;
+    printf("%d\n",i);
+    i++;
+}
+}
+__________________________________________________________________________________________________________________
+(Aufgabe 7)(e)
+Nein endet nicht , denn der Index [i] wird nie durch 3 teilbare Zahl sein
