@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+// pointer
+int main(void){
+    int x=2081;
+    int *p1=&x;
+    int **p2=&p1;
+    int ***p3=&p2;
+    int ****p4=&p3;
+    int *****p5=&p4;
+    int ******p6=&p5;
+    int *******p7=&p6;
+    int ********p8=&p7;
+    int *********p9=&p8;
+    int **********p10=&p9;
+    printf("p1:%d\np2:%d\np3:%d\np4:%d\np5:%d\np6:%d\np7:%d\np8:%d\np9:%d\np10:%d\n",p1,p2,p3,p4,p5,p6,p7,p8,p9,p10);
+    printf("\n\n*p9:%d",*p9);
+    printf("\n\n**p9:%d",**p9);
+    printf("\n\n*p2:%d",*p2);
+    printf("\n\n**p2:%d",**p2);
+}
