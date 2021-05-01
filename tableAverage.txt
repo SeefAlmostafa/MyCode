@@ -1,0 +1,19 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+    double tableAverage(int[],int);
+    int main()
+    {
+    int table[11]={1,2,3,4,5,6,7,8,9,10,14};
+    double Average= tableAverage(table,11);
+    printf("%.2f",Average);
+
+    }
+    double tableAverage(int table[],int len){
+    double result=0;
+    double Average=0;
+    for(int i=0;i<len;i++){
+    result=table[i]+result;
+    Average=result/len;
+    }
+    return Average;
+    }

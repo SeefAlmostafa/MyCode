@@ -1,0 +1,26 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    void sortTable(int[],int);
+
+    int main()
+    {
+        int tableSize=4;
+        int table[4]={15,81,22,13};
+        sortTable(table,tableSize);
+        for(int i=0;i<tableSize;i++)
+            printf("%d\n",table[i]);
+    }
+
+    void sortTable(int table[], int tableSize){
+       int temp;
+        for(int i=0;i<tableSize-1;i++){
+            for(int j=i+1;j<tableSize-1;j++){
+                if(table[i]>table[j]){
+                   temp=table[i];
+                   table[i]=table[j];
+                   table[j]=temp;
+                }
+            }
+        }
+    }

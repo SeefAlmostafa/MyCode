@@ -1,0 +1,21 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    void tableCopy(int[],int[],int);
+    
+    int main()
+    {
+        int tableSize=5;
+        int originalTable[6]={1,2,3,4,5};
+        int copyTable[5];
+        tableCopy(originalTable,copyTable,tableSize);
+        for(int i=0;i<tableSize;i++)
+        printf("%d\n",copyTable[i]);
+
+    }
+    
+    void tableCopy(int originalTable[], int copyTable[], int tableSize){
+        for(int i=0;i<tableSize;i++){
+        copyTable[i]=originalTable[i];
+        }
+    }

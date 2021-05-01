@@ -1,0 +1,21 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    void tableMaximum(int[],int,int);
+
+    int main()
+    {
+        int tableSize=20;
+        int table[21]={10,20,1,40,9,12,6,26,31,30,29,27,33,11,17,44,50,28,60,24};
+        tableMaximum(table,tableSize,30);
+        for(int i=0;i<tableSize;i++)
+        printf("%d\n",table[i]);
+    }
+
+     void tableMaximum(int table[], int tableSize, int maxValue){
+        for(int i=0;i<tableSize;i++){
+        if(table[i]>maxValue)
+            table[i]=0;
+
+        }
+    }
