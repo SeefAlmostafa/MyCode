@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    int score[3]={0};
+    FILE* file=NULL;
+    file=fopen("score.txt","r");
+    if (file!=NULL){
+        fscanf(file,"%d %d %d",&score[0],&score[1],&score[2]);
+        printf("The best scores are %d %d and %d",score[0],score[1],score[2]);
+        fclose(file);
+    }
+    return 0;
+ }

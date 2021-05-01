@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    FILE* file=NULL;
+    int currentCharacter=0;
+    file=fopen("text.txt","r");
+    if (file!=NULL){
+        do {
+            currentCharacter=fgetc(file);
+            printf("%c",currentCharacter);
+
+        }
+        while(currentCharacter!=EOF);
+        fclose(file);
+    }
+    return 0;
+}

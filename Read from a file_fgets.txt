@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define Max_size 1000
+int main()
+{
+    FILE* file=NULL;
+    char string[Max_size]="";
+    file=fopen("text.txt","r");
+    if (file!=NULL){
+        while(fgets(string,Max_size,file)!=NULL){
+            printf("%s",string);
+
+        }
+        fclose(file);
+    }
+    return 0;
+}

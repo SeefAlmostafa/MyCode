@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX_ARRAY 1000
+void removeWhere(FILE*,int);
+
+int main(void){
+
+    FILE *file=NULL;
+    file=fopen("seef.txt","w");
+    char string[MAX_ARRAY]="my name is seef";
+    if(file!=NULL){
+        fprintf(file,string);
+        fseek(file,0,SEEK_SET);
+        removeWhere(file,10);
+        fclose(file);
+    }
+}
+
+void removeWhere(FILE *file,int place){
+
+    for(int i=0;i<place;i++){
+        fprintf(file," ");
+    }
+}
