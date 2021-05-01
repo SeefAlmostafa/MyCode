@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+
+void changePosition(char*,char*);
+void charPermu(char*,int,int);
+
+int main()
+{
+    char str[]="abcd";
+    printf("\n\n The result of the string:\n");
+    int n=strlen(str);
+    charPermu(str,0,n-1);
+    return 0;
+}
+void changePosition(char* str1,char* str2){
+    char temp;
+    temp= *str1;
+    *str1= *str2;
+    *str2= temp;
+}
+void charPermu(char* str,int stno,int endno){
+    int i;
+    if(stno==endno){
+        printf("%s\t",str);
+    }
+    else{
+        i=stno;
+         while(i<=endno){
+            changePosition((str+stno),(str+i));
+            charPermu(str,stno+1,endno);
+            changePosition((str+stno),(str+i));
+            i++;
+
+         }
+    }
+
+
+}

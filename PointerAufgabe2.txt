@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+
+
+int main()
+{
+  int i,n;
+  float* number=NULL;
+  printf("enetr n:");
+  scanf("%d",&n);
+  if (number=NULL){
+      exit(0);
+  }
+  number=calloc(n,sizeof(float*));
+
+  for(i=0;i<n;i++){
+    printf("Number %d:",i+1);
+    scanf("%f",number+i);
+  }
+  for(i=0;i<n;i++){
+    if(*number<*(number+i))
+        *number=*(number+i);
+  }
+  printf("The largest number is:%.2f",*number);
+}
