@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+void reversstring(char[]);
+
+int main(){
+char name[]="Moahmmed";
+reversstring(name);
+printf("%s",name);
+}
+void reversstring(char s[]){
+     char k[strlen(s)+1]; // k[9]='\0'
+    int x,y=0;
+    strcpy(k,s);
+    x=strlen(k)-1;
+
+    while(x>=0)
+        s[y++]=k[x--];
+    return;
+}
