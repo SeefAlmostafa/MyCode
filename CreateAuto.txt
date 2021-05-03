@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct{
+    char hersteller[50];
+    int km;
+    float verbrauch;
+    float tank;
+}Auto;
+
+Auto createAuto(char[],int,float,float);
+void printAuto(Auto);
+Auto fahren(Auto,int);
+Auto tanken(Auto,float);
+
+int main(){
+    system("chcp 1252");
+    Auto honda=createAuto("Honda",35000,6.5,45.0);
+    printAuto(honda);
+    honda = fahren(honda,300);
+    printAuto(honda);
+    honda = fahren(honda,500);
+    printAuto(honda);
+    honda=tanken(honda,30);
+    printAuto(honda);
+    return 0;
+}
+Auto createAuto(char arr[],int km,float verbrauch,float tank){
+    Auto neusAuto;
+    strcpy(neusAuto.hersteller,arr);
+    neusAuto.km=km;
+    neusAuto.verbrauch=verbrauch;
+    neusAuto.tank=tank;
+    return neusAuto;
+}
+void printAuto(Auto erg){
+    printf("\n\n\nDein Hersteller:%s\n",erg.hersteller);
+    printf("Das Kilometerstand ist :%d\n",erg.km);
+    printf("Das Verbrauch ist:%.2f\n",erg.verbrauch);
+    printf("Tank:%.2f\n",erg.tank);
+}
+
+Auto fahren(Auto fahr,int km){
+    int max_km=(100/fahr.verbrauch)*fahr.tank;
+    if(max_km>=km){
+      fahr.km=fahr.km+km;
+      fahr.tank=fahr.tank-(fahr.verbrauch/100)*km;
+    }
+    else{
+        fahr.km=fahr.km+max_km;
+        fahr.tank=0.0;
+        printf("Tank ist leer. Du bist nur %d weit gekommen\n",max_km);
+    }
+    return fahr;
+}
+
+Auto tanken(Auto tank,float liter){
+    tank.tank=tank.tank+liter;
+    return tank;
+}
