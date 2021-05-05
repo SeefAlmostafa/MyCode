@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    
+FILE *fin,*fout;
+int x,sum=0;
+fin=fopen("eingabe.txt","r");
+fout=fopen("Ausgabe.txt","w");
+
+while(fscanf(fin,"%d",&x)!=EOF)
+     sum=sum+x;
+fprintf(fout,"summe:%d\n",sum);
+fclose(fin);
+fclose(fout);
+
+}
