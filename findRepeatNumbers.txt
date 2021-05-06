@@ -1,0 +1,20 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+void findRepeatNumbers(int[],int);
+
+int main(){
+    int arr[]={2,4,5,7,9,7,4};
+    int l=sizeof(arr)/sizeof(arr[0]);
+    for(int i=0;i<l;i++){
+        printf(" %d ",arr[i]);
+    }
+    printf("\n");
+    findRepeatNumbers(arr,l);
+}
+void findRepeatNumbers(int arr[],int len){
+int i,j;
+    for( i=0;i<len;i++)
+        for(j=i+1;j<len;j++)
+            if(arr[i] == arr[j])
+                printf(" %d ",arr[i]);
