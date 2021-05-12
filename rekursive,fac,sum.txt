@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int fac(int n);
+int sum(int arr[],int n);
+int main()
+{
+int arr[]={1,2,3,4,5};
+int result=sum(arr,5);
+int erg=fac(3);
+printf("erg von fac:%d\n",erg);
+printf("sum is:%d\n",result);
+
+}
+
+int sum(int arr[],int n){
+    int L,L1,L2;
+    if(n==1)
+        return arr[0];
+
+    else{
+        L1= sum(arr,n/2);
+        L2= sum(arr+n/2,n-n/2);
+    }
+
+    L=L1+L2;
+    return L;
+
+}
+
+int fac(int n){
+    if(n==0)
+        return 1;
+    else
+        return n*fac(n-1);
+}
+
