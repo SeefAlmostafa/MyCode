@@ -1,0 +1,19 @@
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    void minutesDivision(int* ,int* );
+
+    int main(){
+    int s,m;
+    printf("Geben Sie die Stunden ein:");
+    scanf("%d",&s);
+    printf("Geben Sie die Minuten ein:");
+    scanf("%d",&m);
+    minutesDivision(&s,&m);
+    
+    printf("%d Stunden\n%d Minuten",s,m);}
+
+
+    void minutesDivision(int *stunden ,int *Minuten){
+    *stunden= *Minuten/60;
+    *Minuten= *Minuten%60; }

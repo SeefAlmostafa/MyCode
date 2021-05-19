@@ -1,0 +1,15 @@
+    #include<stdio.h>
+    #include<stdlib.h>
+
+    void triblePointer(int*);
+    
+    int main(){
+    int number=10;
+    int *pointer=&number;
+    triblePointer(pointer);
+    printf("*pointer=%d",*pointer);
+    }
+
+    void triblePointer(int *numberPointer){
+    *numberPointer *=3;
+    }
