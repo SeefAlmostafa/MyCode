@@ -1,0 +1,36 @@
+FILE * fin = fopen("eingabe.txt","w");
+fprintf(fin,"Halloworld");
+
+_________________________________________________
+FILE * fin = fopen("eingabe.txt","r");
+char c;
+int sum = 0;
+while((c = fgetc(fin)) != EOF)
+        sum++;
+printf("%d\n",sum);
+fclose(fin);
+_____________________________________________
+FILE * fout = fopen("ausgabe.txt","w");
+    char s[256] = "Programmierung II";
+    int i = 0;
+    while(s[i] != '\0')
+        fputc(s[i++],fout);
+    fputc('\n',fout);
+    fprintf(fout,"%s\n",s);
+    fclose(fout);
+_____________________________________________
+FILE * fout = fopen("eingabe.txt","r");
+char s[256];
+while(fscanf(fout,"%s",s)!= EOF)
+        fprintf(stdout,"%s ",s);
+ fclose(*fout);
+
+richtig
+_____________________________________________
+char s[4] = "110";
+int j = 0;
+for (unsigned int i = 1; i < strlen(s);i++) {
+        j = 2 * j;
+        j = j + s[i] - '0';
+ }
+fprintf(fout,"%d\n",j);
