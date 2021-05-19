@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Element Element;
+struct Element{
+    int number;
+    Element *next;
+};
+
+typedef struct List List;
+struct List {
+Element *head;
+};
+
+
+List* initialization();
+void insertion(List*,int );
+void deletion (List*);
+
+
+List* initialization(){
+    List *list =malloc(sizeof(*list));
+    Element *element =malloc(sizeof(*element));
+    if(list == NULL  || element == NULL){
+        exit(-1);
+    }
+    element->number=0;
+    element->next=NULL;
+    list->head=element;
+    return list;
+}
+
+
+void insertion(List *list,int newNumber){
+    //creating a new element
+    Element *new = malloc(sizeof(*new));
+    if(list==NULL || new == NULL){
+         exit(-1);
+    }
+    new->number=newNumber;
+    // inserting the element at the begining of the list
+    new->next=list->head;
+    list->head=new;
+}
+
+
+void deletion (List *list){
+    if(list=NULL){
+         exit(-1);
+    }
+    if(list->head!=NULL){
+        Element *toDelete=list->head;
+        list->head=list->head->next;
+        free (toDelete);
+    }
+}
+
+
+void displayList(List* list){
+    if(list==NULL){
+         exit(-1);
+    }
+    Element *current=list->head;
+    while (current!=NULL){
+        printf("%d -> ",current->number);
+        current=current->next;
+    }
+    printf("NULL\n");
+}
+
+
+int main()
+{
+  List *mylist=initialization();
+  insertion(mylist,4);
+  insertion(mylist,5);
+  insertion(mylist,6);
+  insertion(mylist,7);
+  insertion(mylist,8);
+  displayList(mylist);
+}

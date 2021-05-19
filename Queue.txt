@@ -1,0 +1,53 @@
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#define size_array 100
+
+typedef struct {
+    int arr[size_array];
+    int head= -1;
+    int tail= -1;
+    bool isEmpty(){
+        if(head== -1 && tail== -1) return true ;
+        else return false;
+    }
+    bool isFull(){
+        if( tail== size_array-1) return true ;
+        else return false;
+    }
+    void enqueue(int val){
+        if(isFull()) return;
+        else if  (isEmpty()){
+            head=0;
+            tail=0;
+        }
+        else{
+            tail++;
+        }
+        arr[tail]=val;
+    }
+    void dequeue(){
+        if (isEmpty()) return;
+        else if (tail==head){
+            tail=-1;
+            head=-1;
+        }
+    else head++;
+    }
+    int head_val(){
+        if(isEmpty())return -1;
+        else return arr[head];
+    }
+}Queue;
+
+int main()
+{
+    Queue q;
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+    while(!q.isEmpty()){
+        printf("%d\n",q.head_val());
+        q.dequeue();
+    }
+}

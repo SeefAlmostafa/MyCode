@@ -1,0 +1,47 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int** create2DArray(int,int);
+void initialize2DArray(int**,int,int);
+void print2DArray(int**,int,int);
+void free2DArray(int**,int);
+
+
+int main(){
+    int** array2D=create2DArray(3,5);
+    initialize2DArray(array2D,3,5);
+    print2DArray(array2D,3,5);
+    free2DArray(array2D,3);
+    free(array2D);
+}
+
+int** create2DArray(int row,int coulmn){
+    int **array2D=malloc(sizeof(int*)* row);
+    for(int i=0;i<row;i++){
+        array2D[i]=malloc(sizeof(int)*coulmn);
+}
+    return array2D;
+}
+
+void initialize2DArray(int** array2D,int row,int coulmn){
+    for(int i=0;i<row;i++){
+        for(int j=0;j<coulmn;j++)
+            array2D[i][j]=0;
+    }
+}
+
+void print2DArray(int** array2D,int row,int coulmn){
+    printf("Your Array is:");
+    for(int i=0;i<row;i++){
+        printf("\n");
+        for(int j=0;j<coulmn;j++)
+            printf("%d\t",array2D[i][j]);
+    }
+
+}
+
+void free2DArray(int** array2D,int row){
+for(int i=0;i<row;i++){
+    free(array2D[i]);
+    }
+}
