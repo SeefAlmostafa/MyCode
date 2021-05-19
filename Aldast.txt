@@ -1,0 +1,31 @@
+begin
+
+    While(!stack_leer(G2))
+    begin
+        val := pop(G2);
+        if(val = 'B') Then
+            push(G3, val);
+        Else
+            push(G1, val);
+    end;
+    
+    While(!stack_leer(G1))
+    begin
+        val := pop(G1);
+        if(val = 'B') Then
+            push(G3, val);
+        Else
+            push(G2, val);
+    end;
+
+    While(!stack_leer(G2))
+    begin
+        push(G1, pop(G2));
+    end;
+    
+    While(!stack_leer(G3))
+    begin
+        push(G2, pop(G3));
+    end;
+    
+end;
