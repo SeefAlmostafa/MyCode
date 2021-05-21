@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+// Ubung2Aufgabe2
+int main()
+{
+    int tage,woche,monate,jahre;
+    printf("Geben Sie Anzahl der Tagen:");
+    scanf("%d",&tage);
+    jahre=tage/365;
+    monate=(tage%365)/30;
+    woche=((tage%365)%30)/7;
+    tage=(((tage%365)%30)%7);
+    printf("Jahre:%d\nMonate:%d\nWoche:%d\nTage:%d",jahre,monate,woche,tage);
+
+}
