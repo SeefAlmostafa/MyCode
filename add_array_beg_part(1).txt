@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+// Array_is_not_full
+
+int add_array_beg(int arr[],int n,int val);
+void printArray(int*,int);
+
+int main()
+{
+    int arr[10]={2,3,4,5,6,7,8,9,10};
+    int n=add_array_beg(arr,9,1);
+    printArray(arr,n);
+}
+
+int add_array_beg(int arr[],int n,int val){
+    for(int i=n-1;i>=0;i--){
+        arr[i+1]=arr[i];
+    }
+    arr[0]=val;
+    return n+1;
+}
+void printArray(int* arr,int n){
+    for(int i=0;i<n;i++){
+        printf("%d\t",arr[i]);
+    }
+}

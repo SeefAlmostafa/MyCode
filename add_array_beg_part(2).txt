@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+// Array_is_full
+
+int add_array_beg(int arr[],int n,int val);
+void printArray(int*,int);
+void copyArray(int arr1[],int arr2[],int n2);
+
+int main()
+{
+    int arr1[10]={0};
+    int arr2[9]={2,3,4,5,6,7,8,9,10};
+    int n1=sizeof(arr1)/sizeof(arr1[0]);
+    int n2=sizeof(arr2)/sizeof(arr2[0]);
+    if(n1>n2){
+       copyArray(arr1,arr2,n2);
+       n1=add_array_beg(arr1,n1,1);
+    }
+    else{
+        exit(-1);
+    }
+    printArray(arr1,n1);
+}
+
+int add_array_beg(int arr[],int n,int val){
+
+    for(int i=n-1;i>=0;i--){
+        arr[i+1]=arr[i];
+    }
+    arr[0]=val;
+    return n;
+}
+void printArray(int* arr,int n){
+    for(int i=0;i<n;i++){
+        printf("%d\t",arr[i]);
+    }
+}
+void copyArray(int arr1[],int arr2[],int n2){
+
+    for(int i=0;i<n2;i++){
+        arr1[i]=arr2[i];
+    }
+}
