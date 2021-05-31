@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+int rechne_a(int A[],int n);
+
+int main(){
+    int n;
+    printf("Enter N:");
+    scanf("%d",&n);
+    n=3;
+    int A[100]={1,2,3,4,5};
+    int r=rechne_a(A,n);
+    printf("r:%d",r);
+}
+
+int rechne_a(int A[],int n){
+    int r=0;
+    int i=1;
+    int j;
+     while (log(i)<=n){
+        j=1;
+        while(j<n){
+            r = r + A[j-1] + i;
+            j++;
+        }
+        i=i+2;
+     }
+    return r;
+}
