@@ -1,0 +1,193 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(){
+    int i,a,j;
+    int arr[250];
+    for(i=1;i<250;i++){
+        arr[i]=i;
+    }
+    j=2;
+    while(j<125){
+        a=2*j;
+        do{
+            arr[a]=0;
+            a=a+j;
+        }
+        while(a<250);
+        while(arr[j]>0){
+            j++;
+        }
+        j++;
+    }
+    for(int x=1;x<=250;x++){
+        printf("%d\n",arr[x]);
+    }
+}
+______________________________________________________________________________________________________________________________________________________
+#include<stdio.h>
+#include<stdlib.h>
+#include <string.h>
+
+void verbinden(char* str1,char* str2,int maxLaenge);
+
+int main(){
+    char text[31]="Umwelt-Campus";
+    printf("%s\n",text);
+    verbinden(text,"Birkenfeld",31);
+    printf("%s\n",text);
+    return 0;
+}
+
+void verbinden(char* str1,char* str2,int maxLaenge){
+    int n1=strlen(str1);
+    int n2=strlen(str2);
+    int gesamtLaenge=n1+n2;
+    int i=0;
+    if(gesamtLaenge<maxLaenge){
+        for(int j=n1;j<gesamtLaenge;j++){
+                str1[j]=str2[i];
+                i++;
+        }
+    }
+    else{
+        printf("Array ist Full\n");
+        exit(-1);
+    }
+}
+_________________________________________________________________________________________________________________________________________________________
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    char c='a';
+    char *p_c=&c;
+    char text[6]="Hund";
+    char *ptr=text+1;
+    char *ptr2=&text[4];
+    *(ptr2+1)=*ptr;
+    *ptr= *p_c;
+    ptr2++;
+    text[4]=*ptr2;
+    printf("%s\n",text);
+}
+
+Die geschlossene '}' fehlt und Man greift im Array ein Stelle die nicht resarviert ist, das heisst *(ptr2+1)=*ptr; ist flasch 
+
+____________________________________________________________________________________________________________________________________________________________
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int anzahlTeilbarUndMaximum(int arr[],int* Max,int* teiler,int len );
+
+int main(){
+int zahlen[]={13,4,27,8,20,9};
+int teiler=4;
+int Max;
+int result=anzahlTeilbarUndMaximum(zahlen,&Max,&teiler,6);
+printf("Max:%d\nteiler:%d",Max,result);
+return 0;
+
+}
+
+
+
+
+int anzahlTeilbarUndMaximum(int arr[],int* Max,int* teiler,int len ){
+	int counter=0;
+	*Max=arr[0];
+	for(int i=0;i<len;i++){
+	    if(arr[i]> *Max){
+		*Max=arr[i];
+	    }
+	    if(arr[i]% *teiler==0){
+		counter++;
+	    }
+	}
+	return counter;
+}
+
+__________________________________________________________________________________________________________________________________________________________
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Gepaeck {
+int Gewicht;
+}Gepaeck;
+
+typedef struct Person{
+char name[26];
+int Koerpergewicht;
+ Gepaeck* Koffer;
+}Person;
+
+typedef struct Auto {
+int maxGewicht;
+int anzahlPersonen;
+Person* Insassen[5];
+}Auto;
+
+int berechneGewicht(Auto*);
+int einsteigen(Auto*,Person*);
+int main()
+{
+    Gepaeck gepaeck={3};
+    Person person={"Max",82,&gepaeck};
+    Auto Auto_p={380,1,{&person}};
+
+    printf("Gepaeck:Gewicht:%d\n",gepaeck.Gewicht);
+    printf("Person:\tName:%s  Koerperg:%d\n",person.name,person.Koerpergewicht);
+    printf("Auto:\tMAxgewicht:%d   anzahlPersonen:%d   Insassen:%s\n",Auto_p.maxGewicht,Auto_p.anzahlPersonen,Auto_p.Insassen[0]->name);
+    /*for(int i=0;i<5;i++){
+        printf("Insasse %d:",i+1);
+        scanf("%d",&Auto_p.Insassen[i].Koerpergewicht);
+    }
+    */
+    int gewicht=berechneGewicht(&Auto_p);
+    printf("Gewicht:%d",gewicht);
+
+    Gepaeck seefGepaeck={10};
+    Person student={"Mohammed",200,&seefGepaeck};
+    int returnCode=einsteigen(&Auto_p,&student);
+
+    printf("\nAutoGewicht:%d\n",berechneGewicht(&Auto_p));
+    return 0;
+}
+int berechneGewicht(Auto* Auto_erg){
+int gewicht=0;
+    for(int i=0;i<Auto_erg->anzahlPersonen;i++){
+
+        gewicht += Auto_erg->Insassen[i]->Koerpergewicht;
+        gewicht += Auto_erg->Insassen[i]->Koffer->Gewicht;
+    }
+        return gewicht;
+}
+
+int einsteigen(Auto* Auto_erg,Person* person){
+    int Auto_gewicht=berechneGewicht(Auto_erg);
+    int gewichtSumme = person->Koerpergewicht + person->Koffer->Gewicht;
+    if(gewichtSumme+Auto_gewicht<=Auto_erg->maxGewicht){
+        if(Auto_erg->anzahlPersonen<5){
+            Auto_erg->Insassen[Auto_erg->anzahlPersonen]= person;
+            Auto_erg->anzahlPersonen++;
+        }
+        else{
+            printf("Auto ist voll\n");
+            return -1;
+        }
+    }
+    else{
+        printf("\nDie Gewicht muss nicht %d ueberschreiten\n",Auto_erg->maxGewicht);
+        exit(-1);
+    }
+
+}
+_____________________________________________________________________________________________________________________________________________________
+
+
+
