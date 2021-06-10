@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int pow_number(int number,int exp);
+
+int main(){
+    int number,exp;
+    printf("Enter number:");
+    scanf("%d",&number);
+    printf("Enter exp:");
+    scanf("%d",&exp);
+    int result=pow_number(number,exp);
+    printf("result:%d",result);
+    return 0;
+}
+
+int pow_number(int number,int exp){
+    int result=1;
+    for(int i=0;i<exp;i++){
+        result=result*number;
+    }
+    return result;
+}
+______________________________________________________________________________________________________________________________________________________
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int min=100;
+int max=999;
+
+int istArmstrong();
+int moduloDigit(int);
+int checkNumber(int);
+
+int checkNumber(int number){
+
+    if(number>=min && number<=max){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int moduloDigit(int number){
+    int n=3;
+    int left_n=number/100;
+    int middle_n=(number%100)/10;
+    int right_n=number%10;
+    int result=pow(left_n,n)+pow(middle_n,n)+pow(right_n,n);
+    return result;
+}
+
+
+int istArmstrong(int number){
+    int result=moduloDigit(number);
+    if(number==result){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int main(){
+
+    int number,checkNumberCase;
+    printf("Enter number:");
+    do{
+        scanf("%d",&number);
+        checkNumberCase=checkNumber(number);
+        if(checkNumberCase==0){
+            printf("\nPlease enter three digits like this form [- - -]:");
+        }
+    } while(checkNumberCase==0);
+
+    int result=istArmstrong(number);
+
+    if(result){
+        printf("%d is an Armstrong number\n",number);
+    }
+
+    else{
+        printf("%d is not an Armstrong number\n",number);
+    }
+
+    printf("\n\n****Here are the Armstrong numbers****\n");
+    for(int i=min;i<=max;i++){
+        if(istArmstrong(i)==1){
+            printf("%d\n",i);
+        }
+    }
+}
+______________________________________________________________________________________________________________________________________________________
+#include <stdio.h>
+#include <stdlib.h>
+
+int eingabeInt(int min,int max);
+
+int main(){
+    int eingabe,min=1,max=5;
+    eingabe=eingabeInt(min,max);
+    printf("\n Du hast %d eingegben\n",eingabe);
+
+}
+
+int eingabeInt(int min,int max){
+    int eingabe;
+    while(!(eingabe>=min && eingabe<=max)){
+            printf(" Gib eine zahl ein(%d-%d):",min,max);
+            scanf("%d",&eingabe);
+            if(eingabe>=min && eingabe<=max){
+                break;
+            }
+            else{
+                printf("Falsche Eingabe\n");
+                printf("Die zhal muss zwischen %d und %d liegen\n",min,max);
+            }
+    }
+
+    return eingabe;
+}
