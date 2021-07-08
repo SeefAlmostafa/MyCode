@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
+//Aufzaehlungen
+enum TIERART {KATZE,HUND,FISCH,HAMSTER,MAUS};
+
+//Strukturen
+typedef struct {
+    enum TIERART art;
+    char name[26];
+    float gewicht;
+    int alter;
+    float preis;
+} Haustier;
+
+
+typedef struct {
+    float vermoegen;
+    int anzahlTiere;
+    Haustier tiere[10];
+} Zoohandlung;
+
+//Funktionsprototypen
+Zoohandlung kaufen(Zoohandlung,Haustier);
+void printHaustier(Haustier);
+void printZoohandlung(Zoohandlung);
+
+int main()
+{
+    system("chcp 1252");
+
+    Haustier tier1 = {KATZE,"Leo",7.50,5,575.00};
+    Haustier tier2 = {FISCH,"Nemo",0.30,1,7.25};
+    Haustier tier3 = {HUND,"Rex",12.00,7,90.00};
+
+    printHaustier(tier3);
+
+    Zoohandlung zh1 = {500.00,1,{tier2}};
+
+    printZoohandlung(zh1);
+
+    zh1 = kaufen(zh1,tier3);
+
+    printZoohandlung(zh1);
+
+    return 0;
+}
+
+Zoohandlung kaufen(Zoohandlung zooh,Haustier ht){
+
+    //1. Bedingung: Noch genug Geld
+    if( zooh.vermoegen >= ht.preis ){
+
+        //2. Bedingung: Noch Platz in der Zoohandlung
+        if(zooh.anzahlTiere < 10){
+            zooh.vermoegen -= ht.preis;
+            ht.preis = 1.25;
+            zooh.tiere[zooh.anzahlTiere] = ht;
+            zooh.anzahlTiere++;
+            printf("Tier gekauft\n");
+        }
+        else {
+            printf("Zoohandlung voll\n");
+        }
+    }
+    else {
+        printf("Tier zu teuer\n");
+    }
+
+    return zooh;
+}
+
+void printHaustier(Haustier ht){
+    printf("Name: %s\n",ht.name);
+    printf("Preis: %.2f\n",ht.preis);
+    printf("Gewicht: %.2f\n",ht.gewicht);
+    printf("Alter: %d\n\n",ht.alter);
+}
+
+void printZoohandlung(Zoohandlung zooh){
+    printf("** Zoohandlung *\n");
+    printf("Vermögen: %.2f\n", zooh.vermoegen);
+    printf("Anzahl Tiere: %d\n", zooh.anzahlTiere);
+    printf("Tiere: \n");
+    for(int i = 0; i < zooh.anzahlTiere;i++){
+        printHaustier(zooh.tiere[i]);
+    }
+    printf("\n\n");
+}
