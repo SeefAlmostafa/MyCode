@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef enum TIERART{HUND,MAUS,HAMSTER,KATZE,FISCH};
+
+typedef struct {
+TIERART art;
+char name[20];
+int alter;
+float preis;
+float gewicht;
+}Haustier;
+
+typedef struct {
+float vermoegen;
+Haustier tiere[10]; // tiere[10] ist Array vom Struktur Haustier
+int anzahlTiere;
+}Zoohandlung;
+
+void printHaustier(Haustier);
+void printZoohandlung(Zoohandlung);
+Zoohandlung kaufen(Zoohandlung,Haustier);
+Zoohandlung verkaufen(Zoohandlung,int pos);
+
+int main (){
+
+    Haustier Hund={HUND,"leo",4,100.00,15.00};
+    Haustier Katze={KATZE,"reco",3,200.00,7.00};
+    Haustier Maus={MAUS,"mimi",2,20.00,0.2};
+    Haustier Hamster={HAMSTER,"lili",2,20.00,0.7};
+    Haustier Fisch={FISCH,"rero",5,30.00,2.0};
+
+    Zoohandlung St_wendel={10000.00,{Hund,Katze,Maus,Hamster},4};
+    St_wendel=kaufen(St_wendel,Fisch);
+    //St_wendel.tiere[0].alter=13;
+   St_wendel= verkaufen(St_wendel,0);
+    printf("st.Wendel:\n");
+    printZoohandlung(St_wendel);
+}
+
+
+void printHaustier(Haustier h){
+    printf("tierName:%s\n",h.name);
+    printf("tierGewicht:%.1f kg\n",h.gewicht);
+    printf("tierPreis:%.2f\n",h.preis);
+    printf("tierAlter:%d jahre\n",h.alter);
+    printf("tierPosition:%d\n\n",h.art);
+}
+
+void printZoohandlung(Zoohandlung z){
+
+    printf("vermoegen:%.2f\n",z.vermoegen);
+    printf("AnazhlTiere:%d\n",z.anzahlTiere);
+    for(int i=0;i<z.anzahlTiere;i++){
+        printHaustier(z.tiere[i]);
+    }
+}
+
+Zoohandlung kaufen(Zoohandlung z,Haustier h){
+
+    if(z.vermoegen>=h.preis && z.anzahlTiere < 10 ){
+        z.vermoegen -= h.preis;
+        z.tiere[z.anzahlTiere]= h;
+        z.anzahlTiere++;
+        printf("Tier gekauft\n");
+
+    }
+    else{
+        printf("Tier kann nicht gekauft werden\n");
+    }
+    return z;
+}
+
+Zoohandlung verkaufen(Zoohandlung z,int pos){
+    if(z.anzahlTiere > 0 && pos < z.anzahlTiere){
+        z.vermoegen += z.tiere[pos].preis;
+        z.anzahlTiere--;
+
+        for(int i=pos;i<=z.anzahlTiere;i++){
+            z.tiere[i]=z.tiere[i+1];
+        }
+        printf("Tier verkauft\n");
+        return z;
+    }
+    return z;
+
+}
