@@ -1,0 +1,137 @@
+ss2018/KlausurFrage
+#include <stdio.h>
+#include <stdlib.h>
+int bestimmeLaenge(char[]);
+int main(){
+
+    char text[30]="Umwelt-Campus Birkenfeld";
+    int laenge=bestimmeLaenge(text);
+    printf("Die Laenge ist: %d",laenge);
+    return 0;
+}
+int bestimmeLaenge(char text[]){
+    int laenge=0;
+    for(int i=0;text[i]!='\0';i++){
+        laenge++;
+    }
+    return laenge;
+
+}
+
+________________________________________________________________
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int bestimmeScrabblePunkt(char);
+int main(){
+    char buchstabe;
+    printf("Enter your letter:");
+    scanf("%c",&buchstabe);
+    int wert=bestimmeScrabblePunkt(buchstabe);
+    printf("ergebnis:%d",wert);
+}
+int bestimmeScrabblePunkt(char Buchstabe){
+    switch(Buchstabe){
+        case 'K':return 5;break;
+        case 'Q':
+        case 'Z':return 10;break;
+        case 'X':
+        case 'J':return 8;break;
+        default:return 0;
+    }
+}
+____________________________________________________________________
+// Aufgabe(4)(a,b,c,d,e)-Klausur SS-2018
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Person{
+    char name[20];
+    int alter;
+    float Kontostand;
+}Person;
+
+struct Auto{
+    int Baujahr;
+    float Neupreis;
+    int Kilometerstand;
+    struct Person besitzer;
+}Auto;
+
+struct Auto verkaufen(struct Auto,struct Person,int);
+struct Auto printAuto(struct Auto);
+struct Person printPerson(struct Person );
+
+
+int main(){
+    struct Person Max={"Max",35,25000};
+    struct Person moritz={"Moritz",17,8000};
+    struct Person eva={"Eva",25,15700};
+    struct Auto honda={2010,22000.00,150000,Max};
+    //honda=verkaufen(honda,moritz,2018);
+    honda=verkaufen(honda,eva,2018);
+    printAuto(honda);
+    printf("\n");
+    printPerson(eva);
+    printf("\n");
+    printPerson(Max);
+
+}
+
+struct Auto verkaufen(struct Auto p_auto,struct Person p_person,int ak_jahr){
+        if(p_person.alter< 18){
+            printf("Verkauf ist nicht erfolgreich , Sie sind keine volljaehrige Person\n");
+            return p_auto;
+        }
+
+        int  auto_alt= ak_jahr-p_auto.Baujahr;
+        int p1=25;
+        float aktuellPreis= p_auto.Neupreis;
+        if(auto_alt > 0) {
+            float wertVelrust = ((p1 * p_auto.Neupreis)/100); // 25% abgezogen
+            aktuellPreis -= wertVelrust;
+        }
+        if(auto_alt > 1) {
+            int p2 = (auto_alt -1) * 5;
+            float wertVelrust = ((p2 * aktuellPreis)/100);
+            aktuellPreis -= wertVelrust;
+        }
+
+        else if(p_person.Kontostand<aktuellPreis){
+            printf("Sie haben kein genug Geld\n");
+
+        }
+        else{
+        p_person.Kontostand-=aktuellPreis;
+        printf("Das Auto wurde an %s verkauft\n",p_person.name);
+        p_auto.besitzer.Kontostand +=aktuellPreis;
+    }
+        return p_auto;
+}
+
+
+struct Auto printAuto(struct Auto p_auto){
+    printf("***Auto***\n");
+    printf("BauJahr:%d\n",p_auto.Baujahr);
+    printf("Kilometerstand:%d\n",p_auto.Kilometerstand);
+    printf("Preis:%.2f\n",p_auto.Neupreis);
+    printf("\n***Besitzer***\n");
+    printPerson(p_auto.besitzer);
+}
+
+struct Person printPerson(struct Person p_person){
+    printf("name:%s\n",p_person.name);
+    printf("Alter:%d\n",p_person.alter);
+    printf("Kontostand:%.2f\n",p_person.Kontostand);
+
+}
+
+_____________________________________________________________________________________________________________________________________________________
+// Aufgabe(4)(f)-Klausur SS-2018
+
+Die Kontostände bleiben unverändert, denn "verkaufen()" nimmt nur eine Kopie von den Personen "Max","Eva". 
+Möchte man die Kontostände in der main funktion verändert bekommen, dann soll die Funktion mit pointer/Referenzen gelöst. 
+z.B  struct Auto verkaufen(struct Auto &p_auto,struct Person &p_person,int ak_jahr);
+oder struct Auto verkaufen(struct Auto *p_auto,struct Person *p_person,int ak_jahr);

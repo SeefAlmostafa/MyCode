@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <string.h>
+
+char* stringConnect(char*,char*);
+
+int main ()
+{
+    char text1[28]="These Strings ";
+    char text2[14]="Are Connected";
+    stringConnect(text1,text2);
+    printf("%s",text1);
+}
+
+char* stringConnect(char* text1,char* text2){
+    int laengeText1=0;
+    for(int i=0;text1[i]!='\0';i++){
+        laengeText1++;
+    }
+    for(int j=0;text2[j]!='\0';j++){
+        text1[laengeText1]=text2[j];
+        laengeText1++;
+    }
+    text1[laengeText1] = '\0';
+    return text1;
+}

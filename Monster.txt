@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+typedef struct {
+char name[21];
+float m_lp;
+float m_dm;
+}Monster;
+
+typedef struct {
+char name[21];
+char p;
+float g_dm;
+}Gegenstand;
+
+typedef struct {
+char name[21];
+float h_lp;
+float h_dm;
+Gegenstand gegenstand;
+}Held;
+
+typedef struct {
+char name[21];
+float r_lp;
+Monster *monster;
+}Raum;
+
+
+Raum erstelleRaum();
+void setzeMonster(Raum *r,Monster *m);
+Monster erzeugeZufallsMonster();
+
+void kampfschaden(Held,Monster);
+void betreteRaum(Held*,Raum);
+void printHeld(Held);
+void printMonster(Monster);
+void printGegenstand(Gegenstand);
+
+int main (){
+    //Raum neu=erstelleRaum();
+    Gegenstand schwert={"Excalibur",'n',2.0};
+    Held zelda={"Link",10,3.8,schwert};
+    Monster zufallsMonster = erzeugeZufallsMonster();
+    Raum heilbrunnen={"Heilbrunnen",-3};
+    //Raum Alterraum = erstelleRaum();
+    setzeMonster(&heilbrunnen,&zufallsMonster);
+    betreteRaum(&zelda,heilbrunnen);
+    printHeld(zelda);
+    printMonster(zufallsMonster);
+}
+Raum erstelleRaum(){
+    Raum room;
+    printf("Room name:");
+    scanf("%s",room.name);
+    printf("Room Lebenspunkte:");
+    scanf("%f",&room.r_lp);
+    return room;
+}
+void setzeMonster(Raum *r,Monster *m){
+    r->monster=m;
+}
+void betreteRaum(Held *h ,Raum r){
+     if(r.r_lp > 0){
+        h->h_lp += r.r_lp;
+        r.monster->m_lp += r.r_lp;
+        printf("\nLebenspunkte wurden um %.2f erhoeht\n",r.r_lp);
+      }
+      else{
+        h->h_lp -= r.r_lp;
+        r.monster->m_lp -= r.r_lp;
+        printf("\nLebenspunkte wurden %.2f verringert\n",r.r_lp);
+      }
+      if(r.monster!= NULL){
+            kampfschaden(*h,*r.monster);
+      }
+      else{
+        printf("Kein Monster\n");
+      }
+}
+
+void kampfschaden(Held h,Monster m){
+    while(h.h_lp > 0 && m.m_lp > 0 ){
+         m.m_lp -= (h.h_dm+h.gegenstand.g_dm);
+         h.h_lp -= m.m_dm;
+
+        if(h.h_lp > m.m_lp && m.m_lp <= 0 ){
+            printf("Held hat gewonnen, Lebenspunkte: %.2f \n",h.h_lp);
+        }
+        else if ( m.m_lp > h.h_lp  && h.h_lp <= 0 ){
+            printf("Monster hat gewonnen,Lebenspunkte: %.2f\n",m.m_lp);
+        }
+    }
+}
+
+Monster erzeugeZufallsMonster(){
+    srand(time(NULL));
+    int lp= rand() % 10+1;
+    int dm= rand() % 10+1;
+    Monster m={"ZufallsMonster",lp,dm};
+    return m;
+}
+
+
+void printGegenstand(Gegenstand g){
+    printf("Gegenstand-name:%s\n",g.name);
+    printf("Gegenstand-mode:%c\n",g.p);
+    printf("Gegenstand-Damage:%.2f\n",g.g_dm);
+}
+
+void printHeld(Held h){
+    printf("\n*** Held***\n");
+    printf("name:%s\n",h.name);
+    printf("damge:%.2f\n",h.h_dm);
+    printf("Lebenspunkte:%.2f\n",h.h_lp);
+    //printGegenstand(h.gegenstand);
+}
+
+void printMonster(Monster m){
+    printf("\n****Monster*****\n");
+    printf("MonsterName:%s\n",m.name);
+    printf("Monster-Damage:%.2f\n",m.m_dm);
+    printf("Monster-Lebenspunkte:%.2f\n",m.m_lp);
+}

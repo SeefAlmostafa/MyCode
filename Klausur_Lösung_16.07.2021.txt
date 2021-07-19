@@ -1,0 +1,163 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+
+int main (){
+
+    int n;
+    int flag=1;
+    printf("Enter number:");
+    scanf("%d",&n);
+    for(int i=2;i<=sqrt(n);i++){
+        if(n%i==0){
+            flag=0;
+            break;
+        }
+    }
+    if(n<=1){
+        flag=0;
+    }
+    if(flag==1){
+        printf("%d ist primzahl",n);
+    }
+    else{
+             printf("%d ist keine primzahl",n);
+    }
+}
+_____________________________________________________________________________________________________________________________________________________
+#include <stdio.h>
+#include <stdlib.h>
+
+void Array_intersect(int[],int[],int[],int,int );
+void printArray(int arr[],int len);
+
+int main (){
+    int Zahlen1[]={2,4,5,6,1};
+    int Zahlen2[]={2,7,4,8,6,3,9};
+    int schnittMenge[5]={0};
+    Array_intersect(Zahlen1,Zahlen2,schnittMenge,5,7);
+    printArray(schnittMenge,5);
+
+}
+void  Array_intersect(int arr1[],int arr2[],int arr3[],int len,int len2){
+
+    int k=0;
+    for(int i=0;i<len;i++){
+        for(int j=0;j<len2;j++){
+           if( arr1[i] == arr2[j]){
+               arr3[k]=arr1[i];
+               k++;
+           }
+        }
+    }
+
+}
+void printArray(int arr[],int len){
+    for(int i=0;i<len;i++){
+        printf("%d\t",arr[i]);
+    }
+}
+___________________________________________________________________________________________________________________________________________________
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int kleine_woerte(char[]);
+
+int main (){
+    char text[]="Umwelt Campus Birkenfeld";
+    int erg=kleine_woerte(text);
+    printf("Anzahl kleine Woerte:%d",erg);
+}
+
+int kleine_woerte(char text[]){
+    int counter=0;
+    for(int i=0;text[i]!='\0';i++){
+        if(text[i]>='a' && text[i]<='z'){
+            counter++;
+        }
+    }
+    return counter;
+}
+____________________________________________________________________________________________________________________________________________________
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+int gewicht;
+}Ruestung;
+
+typedef struct {
+char name[24];
+int gewicht;
+char geschlecht;
+Ruestung ruestung;
+}Zwerg;
+
+typedef struct {
+char name[26];
+int Maxgewicht;
+Zwerg zwerge[5];
+int anzahl;
+}Aufzug;
+
+int berechneGewicht(Aufzug);
+Aufzug einsteigen(Zwerg,Aufzug);
+void printZwerg(Zwerg);
+void printAufzug(Aufzug);
+
+int main (){
+    Ruestung neuRuestung={130};
+    Zwerg gmli={"Gmli",30,'m',neuRuestung};
+    Zwerg seef={"Seef",60,'m'};
+    Zwerg julia={"Julia",30,'w'};
+    Aufzug neuAufzug={"Aufzug1",230,{gmli},1};
+    neuAufzug=einsteigen(julia,neuAufzug);
+    neuAufzug=einsteigen(seef,neuAufzug);
+    printAufzug(neuAufzug);
+}
+
+int berechneGewicht(Aufzug a){
+    int GesamtGewicht=0;
+    for(int i=0;i<a.anzahl;i++){
+        GesamtGewicht+= (a.zwerge[i].gewicht+a.zwerge[i].ruestung.gewicht);
+    }
+    return GesamtGewicht;
+
+}
+void printZwerg(Zwerg z){
+    printf("geschlecht:%c\n",z.geschlecht);
+    printf("gewicht:%d\n",z.gewicht);
+    printf("name:%s\n",z.name);
+    printf("ruestungGewicht:%d\n",z.ruestung.gewicht);
+
+}
+void printAufzug(Aufzug a){
+    printf("***Aufzug***\n");
+    printf("Anzahl:%d\n",a.anzahl);
+    printf("Maxgewicht:%d\n",a.Maxgewicht);
+    printf("AufzugName:%s\n",a.name);
+    for(int i=0;i<a.anzahl;i++){
+        printZwerg(a.zwerge[i]);
+    }
+}
+
+Aufzug einsteigen(Zwerg z,Aufzug a){
+    int neuGewicht = berechneGewicht(a) + z.gewicht + z.ruestung.gewicht;
+    int gleichGeschlecht = (a.anzahl > 0 && (z.geschlecht == a.zwerge[0].geschlecht));
+    if(a.anzahl<5 && neuGewicht <= a.Maxgewicht && gleichGeschlecht ){
+        a.zwerge[a.anzahl]=z;
+        a.anzahl++;
+        return a;
+    }
+
+    if(!gleichGeschlecht) {
+         printf("Zwerge muessen gleiche Geschlecht haben\n \n");
+    }
+    else {
+        printf("Aufzug is voll oder ist schwer \n");
+    }
+        return a;
+}

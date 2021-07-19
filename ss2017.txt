@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(){
+    int zaehler = 1;
+    char passwort[30];
+    int passwort_versuch;
+    do{
+        printf("Geben Sie Ihr Passwort ein:");
+        scanf("%s",&passwort);
+        passwort_versuch=strcmp(passwort,"Geheim");
+        if(passwort_versuch == 0){
+            printf("Login erfolgreich\n"); break;
+        }
+        else{
+            printf("Passwort falsch\n");
+        }
+        zaehler++;
+    }   while(zaehler<=3 && passwort != (passwort_versuch == 0));
+}
+______________________________________________________________________________________
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct{
+char name[20];
+int  lp_mod;
+int size;
+}s_item;
+
+typedef struct{
+char name[20];
+int  lp;
+s_item items[2];
+}s_hero;
+
+s_hero addItem(s_hero h,s_item i);
+void printHero(s_hero);
+s_item createItem();
+
+int main()
+{
+ s_item heirtrank={"Heirtrank",5,0};
+ s_item waffe=createItem();
+ s_hero merlin={"Merlin",10};
+ merlin=addItem(merlin,waffe);
+ printHero(merlin);
+}
+
+s_hero addItem(s_hero h,s_item i){
+
+    if((h.lp - i.lp_mod) <= 0){
+        printf("Gegenstand wuerde dich toeten\n");
+        return h;
+    }
+
+    if(h.items[0].name[0]=='\0'){
+        h.items[0] = i;
+        h.lp+=i.lp_mod;
+        if(i.size == 1) {
+            h.items[1] = i;
+        }
+        return h;
+    }
+
+    if(h.items[0].name[0]!='\0' || h.items[1].name[0]=='\0'){
+        h.items[1] = i;
+        h.lp+=i.lp_mod;
+        return h;
+    }
+
+    printf("Gegenstand %s kann nicht getragen werden\n",i.name);
+    return h;
+}
+void printHero(s_hero hero){
+    printf("\n\n***Held Informationene***\n");
+    printf("Heldname:%s\n",hero.name);
+    printf("LebensPunkte:%d\n",hero.lp);
+    for(int i=0;i<2;i++){
+        if(hero.items[i].name[i]==NULL){
+            printf("Hand %d: leer\n",i+1);
+        } else{
+            printf("Hand %d: %s\n",i+1,hero.items[i].name);
+            printf("LebensMode:%d\n",hero.items[i].lp_mod);
+            printf("Size:%d\n",hero.items[i].size);
+        }
+    }
+
+}
+s_item createItem(){
+
+    s_item item;
+    printf("*** Neuen Gegenstand erstellen***\n");
+    printf("Name:");
+    scanf("%s",item.name);
+    printf("Lebensmode:");
+    scanf("%d",&item.lp_mod);
+
+    do{
+        printf("Einhand(0)/ Zweihand(1):");
+        scanf("%d",&item.size);
+    }   while (!(item.size == 0 || item.size == 1));
+
+    return item;
+}

@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+char Uni_name[40];
+char ort[20];
+int anzahl;
+}Uni;
+
+typedef struct {
+    char name[20];
+    int alter;
+    int matrNr;
+    Uni myUni;
+}Student;
+
+
+void printStudent(Student);
+void PrintUni(Uni);
+int main()
+{
+   Student Seef;
+   strcpy(Seef.name,"Seef");
+   Seef.alter=24;
+   Seef.matrNr=13243;
+   strcpy(Seef.myUni.Uni_name,"Umwelt-Campus-Birkenfeld");
+   strcpy(Seef.myUni.ort,"Birkenfeld");
+   Seef.myUni.anzahl=1;
+
+   printStudent(Seef);
+
+}
+
+void printStudent(Student s){
+    printf("Name:%s\n",s.name);
+    printf("Alter:%d\n",s.alter);
+    printf("matrNr:%d\n",s.matrNr);
+    PrintUni(s.myUni);
+}
+
+void PrintUni(Uni myUni){
+
+    printf("Uni_name:%s\n",myUni.Uni_name);
+    printf("Ort:%s\n",myUni.ort);
+    printf("anzahl:%d\n",myUni.anzahl);
+
+}

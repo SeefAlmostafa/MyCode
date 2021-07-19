@@ -1,0 +1,27 @@
+void array_nummer(int arr[],int len);
+int main()
+{
+int arr[]={1,2,3,4,5};
+array_nummer(arr,5);
+}
+
+void array_nummer(int arr[],int len){
+    for(int i=0;i<len;i++){
+        printf("%d\n",arr[i]);
+    }
+}
+
+int berechneLaenge(char*);
+int main()
+{
+    char arr[]="Seef Almostafa";
+    int laenge=berechneLaenge(arr);
+    printf("%d",laenge);
+}
+int berechneLaenge(char* text){
+    int counter=0;
+    for(int i=0;text[i]!='\0';i++){
+        counter++;
+    }
+    return counter;
+}

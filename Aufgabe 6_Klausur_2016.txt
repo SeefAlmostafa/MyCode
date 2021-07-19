@@ -1,0 +1,137 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+typedef struct Raum Raum;
+
+typedef struct {
+char name[20];
+Raum *raum;
+int lp;
+int dmg;
+} Monster;
+
+typedef struct Raum {
+    char name[20];
+    Monster *monster;
+    int lp;
+}Raum;
+
+typedef struct{
+char name[20];
+char buchstabe;
+float damage;
+}Gegenstand;
+
+typedef struct{
+char name[20];
+int lp;
+float x;
+Gegenstand gegenstand;
+}Held;
+
+Raum erstelleRaum();
+void setzeMonster(Raum*,Monster*);
+void betreteRaum(Held*,Raum);
+void kampfschaden(Held,Monster);
+void Result(Held h, Monster m);
+Monster erzeugeZufallsMonster();
+
+int main()
+{
+    Gegenstand schwert={"Excalibur",'n',2.0};
+    Held Mario={"Mario",10,3.8,schwert};
+    Raum heilbrunnen={"Heilbrunnen",NULL,3};
+    Raum Altarraum=erstelleRaum();
+
+
+    //Monster wolf={"Wolf",&Altarraum,7,2};
+    // Monster shadow={heilbrunnen,6,1};
+    // Monster dragon={firstRoom,8,3};
+    Monster zufallsMonster=erzeugeZufallsMonster();
+    setzeMonster(&heilbrunnen,&zufallsMonster);
+    betreteRaum(&Mario,heilbrunnen);
+}
+
+Raum erstelleRaum(){
+    Raum raum;
+    printf("Geben Sie der Raum Name ein:");
+    scanf("%s20",raum.name);
+    printf("Geben Sie die Lebenspunkte ein:");
+    scanf("%d",&raum.lp);
+    return raum;
+}
+
+void setzeMonster(Raum* r, Monster* m){
+    r->monster = m;
+    m->raum = r;
+}
+
+void betreteRaum(Held* h, Raum r){
+    h->lp += r.lp;
+    if(r.monster!=NULL){
+        kampfschaden(*h,*r.monster);
+    }
+}
+
+void kampfschaden(Held h, Monster m){
+    while (m.lp>0 && h.lp>0){
+           m.lp -= h.gegenstand.damage;
+           h.lp -= m.dmg;
+    }
+    Result(h, m);
+}
+
+void Result(Held h, Monster m){
+    printf("Held: {%s, %d}\n", h.name, h.lp);
+    printf("Monster: {%s, %s, %d, %d}\n", m.name, m.raum->name, m.lp, m.dmg);
+    if(h.lp<=0 && m.lp<=0) {
+        printf("Keiner gewonnen!");
+    }
+    else if(h.lp>m.lp){
+        printf("%s hat gewonnen",h.name);
+    }
+    else if(h.lp<m.lp){
+        printf("%s hat gewonnen",m.name);
+    }
+    else{
+        printf("Fehler: Beide leben noch!");
+    }
+}
+
+Monster erzeugeZufallsMonster(){
+    srand(time(NULL));
+    int lp = rand()%10 +1;
+    int dmg = rand()%10 +1;
+    Monster m = {"zufallmonster", NULL, lp, dmg};
+    return m;
+}
+
+
+
+________________________________________________________
+
+
+#include <stdio.h>
+#include <stdlib.h>
+int  enthaeltBuchstaben(char*,char);
+int main()
+{
+  char name[]="Markus";
+  if(enthaeltBuchstaben(name,'r')){
+    printf("Entahlten\n");
+  }
+  else {
+    printf("Nicht Enthalten\n");
+  }
+  return 0;
+}
+int  enthaeltBuchstaben(char* name,char buchstabe){
+    for(int i=0;name[i]!='\0';i++){
+        if(name[i]== buchstabe){
+            return 1;
+        }
+    }
+    return 0;
+}

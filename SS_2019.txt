@@ -1,0 +1,244 @@
+// Aufgabe1-SS 2019
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int arr[]={1,3,6,9,12,23,34};
+    int finde=23;
+    int len=6;
+    int i=0;
+    int ergebnis= -1;
+    while (ergebnis == -1){
+        if(i > len){
+            printf("%d ist nicht entahlten",finde);
+            return -1;
+        }
+
+        int mitte=(len+i)/2;
+
+        if(arr[mitte]== finde){
+            ergebnis=1;
+            printf("%d ist entahlten",finde);
+        }
+
+        else{
+            if(arr[mitte]>finde){
+                len=mitte-1;
+            }
+            else{
+                i=mitte+1;
+            }
+        }
+    }
+}
+_________________________________________________________________________________________________________________________________
+// Aufgabe2-SS 2019
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int satzPalindrom(char[],char[]);
+
+int main()
+{
+    char text [50]="trugtimeinesohellehoseniemitgurt";
+    char helper[50]="";
+    int erg=satzPalindrom(text,helper);
+    if(erg==1){
+        printf("Der Text ist ein Palindrom");
+    }
+    else{
+        printf("Der Text ist kein Palindrom");
+    }
+}
+
+int satzPalindrom(char text[],char helper[]){
+    int i=0;
+    int len_txt=0;
+
+    for(i=0;text[i]!='\0';i++){
+        len_txt++;
+    }
+
+    for(i=0;text[i]!='\0';i++){
+        helper[len_txt-1-i] = text[i];
+    }
+
+    i=0;
+    while(len_txt>0){
+        if(text[i] != helper[i]){
+            return 0;
+        }
+        len_txt--;
+        i++;
+    }
+    return 1;
+}
+________________________________________________________________________________________________________________________________________________________
+// Aufgabe3-SS 2019
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    float Notenschnitt;
+    int anzahl;
+    float bestNote;
+}s_NotenResult;
+
+s_NotenResult notenStatistik(float[],int);
+
+int main()
+{
+    float noten[]={1.3,2.3,5.0,5.0,3.3,1.7,4.0};
+    int len=sizeof(noten)/sizeof(noten[0]);
+    s_NotenResult progra1= notenStatistik(noten,len);
+    printf("Notenschnitt:%.2f\n",progra1.Notenschnitt);
+    printf("bestNote:%.1f\n",progra1.bestNote);
+    printf("Anzahl der durchgefallene:%d\n",progra1.anzahl);
+
+}
+
+s_NotenResult notenStatistik(float arr[],int len){
+    s_NotenResult p={0.0,0,arr[0]};
+    float summe=0;
+    for(int i=0;i<len;i++){
+            summe+=arr[i];
+        if(p.bestNote>arr[i]){
+            p.bestNote=arr[i];
+        }
+        if(arr[i]== 5.0){
+            p.anzahl++;
+        }
+    }
+    p.Notenschnitt=summe/len;
+    return p;
+}
+
+______________________________________________________________________________________________________________________________________________________________
+// Aufgabe4-SS 2019
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+    char name[15];
+    int preis;
+    int gewicht;
+}Gegenstand;
+
+typedef struct {
+    int maxGewicht;
+    Gegenstand inhalt[10];
+    int anzahl;
+}Rucksack;
+
+typedef struct {
+   char name[26];
+   Rucksack rucksack;
+   int goldMuenzen;
+}Spielfigur;
+
+Rucksack addGegenstand(Rucksack,Gegenstand);
+int berechneGewicht(Rucksack);
+Spielfigur kaufeGegenstand(Spielfigur,Gegenstand);
+Spielfigur verkaufeGegenstand(Spielfigur,int);
+void printRuckSack(Rucksack);
+void printGegenstand(Gegenstand);
+void printSpielfigur(Spielfigur);
+
+int main()
+{
+    Gegenstand schwert ={"Schwert",55,12};
+    Gegenstand heiltrank={"Heiltrank",20,5};
+    Gegenstand Zauberstab={"Zauberstab",100,7};
+    Rucksack neuRucksack={25,{schwert,heiltrank},2};
+    Spielfigur merlin={"Merlin",neuRucksack,100};
+    merlin=kaufeGegenstand(merlin,Zauberstab);
+    merlin=verkaufeGegenstand(merlin,2);
+    printSpielfigur(merlin);
+    return 0;
+}
+
+Rucksack addGegenstand(Rucksack r,Gegenstand g){
+
+    if(r.anzahl<10){
+        r.inhalt[r.anzahl]= g;
+        r.anzahl++;
+    }
+
+    else{
+        printf("Es gibt Kein Platz mehr im Rucksack\n");
+    }
+
+    return r;
+}
+
+
+int berechneGewicht(Rucksack r){
+    int max_gewicht =0;
+    for(int i=0;i<r.anzahl;i++){
+       max_gewicht += r.inhalt[i].gewicht;
+    }
+    return max_gewicht;
+}
+
+Spielfigur kaufeGegenstand(Spielfigur sp,Gegenstand g){
+
+        int Bedingung1= sp.goldMuenzen >= g.preis;
+        int Bedingung2= (berechneGewicht(sp.rucksack)+g.gewicht) <= sp.rucksack.maxGewicht;
+        int Bedingung3= sp.rucksack.anzahl < 10;
+
+        if(Bedingung1 && Bedingung2 && Bedingung3){
+            sp.rucksack = addGegenstand(sp.rucksack,g);
+            sp.goldMuenzen -= g.preis;
+            printf("%s wurde gekauft\n",g.name);
+            return sp;
+    }
+
+        printf("%s kann nicht gekauft werden\n",g.name);
+        return sp;
+}
+
+
+Spielfigur verkaufeGegenstand(Spielfigur sp,int index){
+
+        if(sp.rucksack.inhalt[index].name[index] != '\0'){
+            Gegenstand g = sp.rucksack.inhalt[index];
+            sp.rucksack.inhalt[index].name[0] = '\0';
+            sp.goldMuenzen += g.preis * 0.8;
+            sp.rucksack.anzahl--;
+            for(int i=index;i<sp.rucksack.anzahl;i++){
+                  sp.rucksack.inhalt[i]=sp.rucksack.inhalt[i+1];
+            }
+            printf("%s wurde verkauft\n", g.name);
+            return sp;
+        }
+        return sp;
+}
+
+
+void printGegenstand(Gegenstand g){
+    printf("Name:%s\t",g.name);
+    printf("Gewicht:%d\t",g.gewicht);
+    printf("preis:%d\t\n",g.preis);
+}
+
+
+void printRuckSack(Rucksack r){
+
+    printf("maxGewicht:%d\n",r.maxGewicht);
+    printf("anzahl:%d\n",r.anzahl);
+    for(int i=0;i<r.anzahl;i++){
+        printf("Gegenstaende %d:\t",i+1);
+        printGegenstand(r.inhalt[i]);
+    }
+}
+
+void printSpielfigur(Spielfigur sp){
+    printf("\nSpielfigur info:\n");
+    printf("Name:%s\n",sp.name);
+    printf("Gold:%d\n",sp.goldMuenzen);
+    printRuckSack(sp.rucksack);
+}
+

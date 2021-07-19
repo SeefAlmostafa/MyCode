@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <string.h>
+
+char* stringCharCopy(char*,char*,int);
+
+int main ()
+{
+    char text1[20]="To be ";
+    char text2[13]="or not to be";
+    stringCharCopy(text1,text2,12);
+    printf("%s",text1);
+}
+
+char* stringCharCopy(char* text1,char* text2,int len){
+    int counter=0;
+    for(int i=0;text1[i]!='\0';i++){
+        counter++;
+    }
+    for(int i=0;i<len;i++){
+        text1[counter]=text2[i];
+        counter++;
+    }
+    text1[counter]='\0';
+    return text1;
+}
