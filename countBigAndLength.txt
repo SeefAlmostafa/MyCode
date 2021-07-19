@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct{
+char name[50];
+int alter;
+}Person;
+Person createPerson(char[],int);
+void printPerson(Person);
+
+int main(){
+    Person person;
+    printf("Geben Sie den Namen ein:");
+    scanf("%s",person.name);
+    printf("Geben Sie das Alter ein:");
+    scanf("%d",&person.alter);
+    person=createPerson(person.name,person.alter);
+    printPerson(person);
+
+}
+
+Person createPerson(char name[],int alter){
+    Person p;
+    p.alter=alter;
+    strcpy(p.name,name);
+    return p;
+}
+void printPerson(Person p){
+    printf("Name:%s\n",p.name);
+    printf("Alter:%d\n",p.alter);
+}
+__________________________________________________________________
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Dummy{
+    int big;
+    int length;
+};
+struct Dummy countBigAndLength(char[]);
+int main(){
+ char text[]="Umwelt-Campus Birkefeld";
+ struct Dummy erg=countBigAndLength(text);
+ printf("Anzahl grosse Buchstaben:%d\n",erg.big);
+ printf("Laenge des Textes:%d",erg.length);
+ return 0;
+
+}
+struct Dummy countBigAndLength(char text[]){ 
+
+    struct Dummy counter;
+    counter.big=0;
+    counter.length=0;
+    counter.
+    for(int i=0;text[i]!='\0';i++){
+        counter.length++;
+        if(text[i]>='A'&&text[i]<='Z'){
+            counter.big++;
+        }
+    }
+    return counter;
+}
+
