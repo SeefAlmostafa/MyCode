@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include<string.h>
+
+struct node{
+struct node* prev;
+int number;
+struct node* next;
+};
+
+struct node* addToempty(struct node* head,int number);
+struct node* addAtBag(struct node* head,int number);
+struct node* addAtEnd(struct node* head,int number);
+struct node* addAfterPos(struct node* head,int number,int pos);
+struct node* addBeforePos(struct node* head,int number,int pos);
+
+int main(){
+    struct node* head=NULL;
+    struct node* ptr=NULL;
+    head=addToempty(head,45);
+    head=addAtBag(head,22);
+    addAtEnd(head,3);
+    addAtEnd(head,10);
+    addAfterPos(head,13,2);
+    addBeforePos(head,12,3);
+    ptr=head;
+    while(ptr!=NULL){
+        printf("%d\t",ptr->number);
+        ptr=ptr->next;
+    }
+}
+
+
+// the list is empty
+struct node* addToempty(struct node* head,int number){
+    struct node* temp=malloc(sizeof(*temp));
+    temp->prev=NULL;
+    temp->next=NULL;
+    temp->number=number;
+    head=temp; // give the adresse to head
+    return head;
+}
+
+struct node* addAtBag(struct node* head,int number){
+   struct node* temp=malloc(sizeof(*temp));
+    temp->prev=NULL;
+    temp->next=NULL;
+    temp->number=number;
+    // new for addAtBag()
+    temp->next=head;
+    head->prev=temp;
+    head=temp;
+
+    return head;
+}
+
+struct node* addAtEnd(struct node* head,int number){
+    struct node* temp,*ptr;
+    temp=malloc(sizeof(*temp));
+    temp->prev=NULL;
+    temp->next=NULL;
+    temp->number=number;
+    ptr=head;
+
+    while(ptr->next!=NULL){
+        ptr=ptr->next;
+    }
+    ptr->next=temp;
+    temp->prev=ptr;
+    return head;
+
+}
+
+struct node* addAfterPos(struct node* head,int number,int pos){
+    struct node* newP=NULL;
+    struct node* temp=head;
+    struct node* temp2=NULL;
+    newP=addToempty(newP,number);
+    while(pos!=1){
+        temp=temp->next;
+        pos--;
+    }
+
+    // wichtig
+    temp2=temp->next;
+    temp->next=newP;
+    temp2->prev=newP;
+    newP->next=temp2;
+    newP->prev=temp;
+
+    return head;
+}
+struct node* addBeforePos(struct node* head,int number,int pos){
+    struct node* newP=NULL;
+    struct node* temp=head;
+    struct node* temp2=NULL;
+    newP=addToempty(newP,number);
+
+    int position=pos;
+    while(position>2){
+        temp=temp->next;
+        position--;
+    }
+
+    //first Node
+    if(pos==1){
+        head=addAtBag(head,number);
+    }
+
+    else{
+        temp2=temp->next;
+        temp->next=newP;
+        temp2->prev=newP;
+        newP->next=temp2;
+        newP->prev=temp;
+    }
+
+    return head;
+}

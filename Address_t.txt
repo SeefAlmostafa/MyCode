@@ -1,0 +1,79 @@
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+
+typedef struct addr{
+char name[20], address[256];
+struct addr *left, *right;
+}Address_t;
+
+int NoOfEntries(Address_t *first);
+void printList(Address_t* list);
+Address_t* DeleteFirstAddress (Address_t *first);
+void InsertAfter(Address_t *p, char *new_name, char *new_address);
+
+
+int main(){
+    Address_t* newAdress=malloc(sizeof(*newAdress));
+    newAdress->left = NULL;
+    newAdress->right = NULL;
+    strcpy(newAdress->address,"Bliesenstrasse 2");
+    strcpy(newAdress->name,"yousuf");
+    InsertAfter(newAdress,"Leon","Zum Augenborn 53");
+    InsertAfter(newAdress,"Julia","bahnhofstrasse 4");
+    InsertAfter(newAdress,"Alex","Amtsstrasse 21");
+    newAdress=DeleteFirstAddress(newAdress);
+    int anzahlEntries=NoOfEntries(newAdress);
+    printList(newAdress);
+}
+
+
+
+int NoOfEntries(Address_t *first){
+    int count=0;
+    while(first!=NULL){
+        count++;
+        first=first->right;
+    }
+    return count;
+}
+
+
+void InsertAfter(Address_t *p, char *new_name, char *new_address){
+
+    Address_t* newWorker=malloc(sizeof(*newWorker));
+    strcpy(newWorker->name,new_name);
+    strcpy(newWorker->address,new_address);
+    Address_t *q = p->right;
+    if(q!=NULL){
+        q->left=newWorker;
+        newWorker->right=q;
+    }
+    else{
+        newWorker->right=NULL;
+    }
+    newWorker->left=p;
+    p->right=newWorker;
+
+}
+
+
+
+Address_t* DeleteFirstAddress (Address_t *first){
+    Address_t* q =first->right;
+    if(q != NULL) {
+        q->left=NULL;
+    }
+    free(first);
+    return q;
+}
+
+void printList(Address_t* first){
+
+    while(first!=NULL){
+        printf("name:%s ",first->name);
+        printf("Adresse:%s\n",first->address);
+        first=first->right;
+    }
+}
+

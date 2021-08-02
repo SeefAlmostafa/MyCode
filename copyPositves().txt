@@ -1,0 +1,34 @@
+#include<stdlib.h>
+#include<stdio.h>
+
+int copyPositives ( int *p, int n, int **q ){
+    int noPos = 0, i = 0, j =0;
+    for(i=0; i < n; i++){
+        if (p[i] >= 0 ){
+            noPos++;
+        }
+    }
+
+    *q = malloc(noPos * sizeof(int));
+
+    for(i=0; i < n; i++){
+        if (p[i] >= 0 ){
+            (*q)[j] = p[i];
+            j++;
+        }
+    }
+
+// hier: Skizzierung des Laufzeitstacks anfertigen
+    return noPos;
+}
+
+int main (void){
+    int noPos = 0, i = 0;
+    int p[3] = {1,-3,4};
+    int *q ;
+    noPos = copyPositives(p, 3, &q);
+
+    for ( i = 0; i < noPos; i++)
+        printf("%d\n", q[i]);
+    return 0;
+}

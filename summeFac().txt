@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int summeFac(int[],int);
+int main()
+{
+    int arr[]={4,4,2,6,2,4,5};
+    int len=sizeof(arr)/sizeof(arr[0]);
+
+    int summe=summeFac(arr,len);
+    printf("Summe:%d",summe);
+}
+
+int summeFac(int arr[],int len){
+    int l1,l2,l;
+    if(len==1){
+        l=arr[0];
+    }
+    else{
+        l1=summeFac(arr,len/2);
+        l2=summeFac(arr+len/2,len-len/2);
+        l=l1+l2;
+    }
+    return l;
+}

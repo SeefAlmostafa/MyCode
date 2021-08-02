@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int countLetters (FILE * fin);
+
+int main(void){
+    int noLetters;
+    char filename[256];
+    FILE * infp=NULL;
+    
+    printf("Geben Sie bitte den Namen der Datei ein : ");
+    scanf("%s", filename);
+    
+    if((infp = fopen(filename, "r")) == NULL ) {
+        printf("Die Datei %s konnte nicht geoeffnet werden\n",filename);
+        exit(1);
+    }
+    
+    noLetters = countLetters(infp);
+    printf("Die Datei %s enthaelt %d Buchstaben\n", filename, noLetters);
+    fclose(infp);
+    
+    return 0;
+}
+
+int countLetters (FILE *fin){
+
+    int counter=0;
+    int currentLetter;
+    
+    if(fin!=NULL){
+        do{
+            currentLetter=fgetc(fin);
+            counter++;
+        }while(currentLetter!=EOF);
+    }
+    return counter-1;
+}

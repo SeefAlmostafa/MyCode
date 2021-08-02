@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(){
+    
+    FILE* fp;
+    char fileName[50];
+    
+    printf("Enter FileName:");
+    scanf("%s",fileName);
+
+    int num,sum=0;
+    fp=fopen(fileName,"w");
+    
+    if(fp!=NULL){
+       for(int i=0;i<5;i++){
+            printf("Enter number%d:",i+1);
+            scanf("%d",&num);
+            fprintf(fp,"%d\n",num);
+            sum+=num;
+       }
+    }
+    
+    else{
+        printf("%s can not be opened",fileName);
+        exit(-1);
+    }
+    
+    fprintf(fp,"Summe:%d",sum);
+    fclose(fp);
+}

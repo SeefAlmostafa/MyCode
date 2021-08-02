@@ -1,0 +1,18 @@
+#include<stdlib.h>
+#include<stdio.h>
+
+int C(int n, int k)
+{
+    int e1, e2 ;
+    if (k == 0 || n == k) return 1;
+    e1 = C(n-1, k-1) ;
+    e2 = C(n-1, k);
+    return e1 + e2 ;
+}
+int main(){
+    int erg=C(2,0);
+    printf("c(2,0):%d\n",erg);
+    erg=C(2,2);
+    printf("c(2,2):%d\n",erg);
+
+}

@@ -1,0 +1,84 @@
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+
+typedef struct emp {
+    char name[20];
+    int age;
+    struct emp *left, *right;
+} Employee_t;
+
+int noOfEmployees(Employee_t *p);
+Employee_t* InsertAfter ( Employee_t *p, char *name, int age );
+void DeleteAll( Employee_t *p);
+void printList( Employee_t *p);
+
+int noOfEmployees(Employee_t *p){
+    int count=0;
+    Employee_t* current=p;
+    while(current->left != NULL) {
+        current = current->left;
+    }
+    while (current != NULL){
+        count++;
+        current=current->right;
+    }
+    return count;
+}
+
+
+Employee_t* InsertAfter ( Employee_t *p, char *name, int age ){
+    Employee_t* newWorker=malloc(sizeof(*newWorker));
+    newWorker->age=age;
+    strcpy(newWorker->name,name);
+    if(p->right != NULL) {
+        p->right->left = newWorker;
+        newWorker->right = p->right;
+    } else {
+        newWorker->right = NULL;
+    }
+    newWorker->left = p;
+    p->right = newWorker;
+    return newWorker;
+}
+
+
+void DeleteAll ( Employee_t *p){
+    if(p == NULL){
+        exit(-1);
+    }
+    while (p->right != NULL){
+       Employee_t *toDelete = p;
+       p = p->right;
+       free(toDelete);
+    }
+    free(p);
+}
+
+void printList ( Employee_t *p){
+    Employee_t* current=p;
+    while(current->left != NULL) {
+        current = current->left;
+    }
+    while(current!=NULL){
+        printf("%s, ",current->name);
+        printf("%d\n",current->age);
+        current = current->right;
+    }
+    printf("NULL\n");
+}
+
+
+int main(){
+    Employee_t* boss=malloc(sizeof(*boss));
+    boss->age = 50;
+    strcpy(boss->name, "Seef");
+    boss->left = NULL;
+    boss->right = NULL;
+    InsertAfter(boss,"Leon",22);
+    InsertAfter(boss,"Alex",24);
+    InsertAfter(boss,"Ahmed",25);
+    int number=noOfEmployees(boss);
+    printList(boss);
+    DeleteAll(boss);
+}

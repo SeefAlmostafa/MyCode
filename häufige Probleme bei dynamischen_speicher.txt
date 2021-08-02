@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include<string.h>
+
+int main()
+{
+
+    int q = 10;
+    int *p = malloc(10*sizeof(int));
+    p[0] = q;
+    p = &q;
+    q = 20;
+    printf("Ergebnis: %d  %d",p[0],q);
+}
+// Das problem ist  wenn man in p nochmal eine neue Adresse speichert,dann erzeugt man speichermüll im heap
+// man hat ein p-array erzeugt, aber p zeigt nicht mehr darauf und somit entsteht speichermüll im heap 
+// eine Lösung wäre dass man erst free(p) gibt dann p=&q ausführt
+// oder einen neuen Zeiger deklarieren und dort die speicheradesses von dem p-Array speichern damit man den Zugriff darauf nicht verlieret
+
+
+___________________________________________________________________________________________________________________________________________
+
+#include <stdio.h>
+#include<string.h>
+
+int main()
+{
+
+   int *p, *q;
+   p = malloc(4 * sizeof(int));
+   q = p;
+   q[0] = 50;
+   free(p);
+   printf("Ergebnis: %d",q[0]);
+}
+
+// unzulässige Dereferenzierung, man kann q nicht ausgeben,
+//da  q=p ist und  p wurde freigegeben, das heißt q inhalte wurden auch freigegeben 
+//p und q beiden zeigen auf die gleichen Stelle im heap, wenn p freigegeben dann ist auch automatisch q freigegeben

@@ -1,0 +1,13 @@
+int main()
+{
+int ar[10] = {0,10,20,30,40,50,60,70,80,90};
+    int i=0, * p;
+    p = ar + 9;
+    while(*p--){
+        i++;
+    }
+    printf("Ergebnis: %d\n", i * *(p + 2));
+}
+_____________________________________________________________
+//Die *p-- greift die stelle ar[-1] nach i=9
+//d.h *(p+2) = 10 in diesem Fall und nicht die 20

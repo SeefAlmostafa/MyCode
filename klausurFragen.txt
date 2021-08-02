@@ -1,0 +1,66 @@
+#include<stdlib.h>
+#include<stdio.h>
+// a
+double* createArray(int length, double init_value )
+{
+    int i = 0;
+    double *arr = NULL;
+
+    arr=malloc(sizeof(double)*length);
+    for(i=0;i<length;i++){
+        arr[i]=init_value;
+    }
+    return arr;
+}
+
+    int main ( void)
+    {
+    double *arr = NULL;
+    arr = createArray(10,5.0);
+    for (int i = 0; i < 10; i++)
+        printf("%e\n",arr[i]);
+    free(arr);
+    return 0;
+}
+//b -> arr liegt im Stack und arr[0] liegt im Heap
+_______________________________________________________________________________________________________________________________________________________
+
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+int copyMatNr9 ( FILE *fin, FILE *fout){
+    int counter=0;
+    char str[8];
+    while (fscanf(fin, "%s", str) != EOF){
+        if(str[0] == '9'){
+            fprintf(fout, "%s\n", str);
+            counter++;
+        }
+    }
+    return counter;
+}
+int main ( void )
+{
+    FILE *fin = NULL, *fout = NULL;
+    int noMatNr ;
+    char *finname = "eingabe.txt", *foutname = "ausgabe.txt";
+
+    fout=fopen(foutname,"w");
+    fin=fopen(finname,"r");
+
+    if(fin==NULL|| fout==NULL){
+        exit(-1);
+    }
+
+    noMatNr = copyMatNr9(fin,fout);
+    printf("Datei %s enthaelt %d 9er Matrikelnummern\n", foutname, noMatNr);
+_______________________________________________________________________________________________________________________________________________________
+
+
+    fclose(fin);
+    fclose(fout);
+
+    return 0;
+}

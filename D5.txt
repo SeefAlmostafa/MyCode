@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+int * readNumbers(FILE * fin, int * n);
+void writeNumbers(FILE * fout, int * arr, int n);
+void sort(int arr[], int n);
+
+int main(void){
+	int n, * p;
+	FILE * infp, * outfp ;
+	if((infp = fopen ("sort.txt", "r")) == NULL){
+		printf("Die Datei sort.txt konnte nicht geoeffnet werden\n");
+		exit(1);
+	}
+	if((outfp = fopen ("sortneu.txt", "w")) == NULL){
+		printf("Die Datei sortneu.txt ");
+		printf("konnte nicht geoeffnet werden\n");
+		exit(1);
+	}
+	p = readNumbers(infp, &n);
+	sort(p, n);
+	writeNumbers(outfp, p, n);
+	free(p);
+	fclose(infp);
+	fclose(outfp);
+	return 0;
+}
+
+void sort(int arr[], int n){
+	int i, j, temp;
+	for(i = n; i > 0; i--)
+		for(j =0; j < i-1; j++)
+			if(arr[j] > arr[j +1]){
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+	return;
+}
+
+int * readNumbers(FILE * fin, int * n) {
+    int *p, i, tmp;
+
+    fscanf(fin, "%d", n);
+    p = malloc(*n * sizeof(int));
+
+    for(i=0; i < *n; i++) {
+        fscanf(fin,"%d",&tmp);
+        p[i]= tmp;
+    }
+    return p;
+}
+
+void writeNumbers(FILE * fout, int * arr, int n) {
+
+    int i = 0;
+    fprintf(fout, "%d\n", n);
+
+    for(i=0;i<n;i++) {
+        fprintf(fout, "%d\n", arr[i]);
+    }
+
+}

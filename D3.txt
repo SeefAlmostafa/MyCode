@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct {
+char name[40];
+int age;
+char address[40];
+char sex;
+}Student;
+
+void printStudent(Student);
+  FILE* studentFile;
+
+int main(){
+
+    char fileName[30];
+    printf("Enter fileName:");
+    scanf("%s",fileName);
+
+    Student ALEX={"Alex",23,"Disney_street",'m'};
+    Student LEON={"Leon",19,"AlterStreet",'m'};
+    Student ANNA={"Anna",22,"WallStreet",'w'};
+
+    studentFile=fopen(fileName,"w");
+
+    if(studentFile!=NULL){
+        printStudent(ALEX);
+        printStudent(LEON);
+        printStudent(ANNA);
+    }
+}
+
+void printStudent(Student s){
+    fprintf(studentFile,"name:%s\n",s.name);
+    fprintf(studentFile,"address:%s\n",s.address);
+    fprintf(studentFile,"age:%d\n",s.age);
+    fprintf(studentFile,"sex:%d\n\n",s.sex);
+}

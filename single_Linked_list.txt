@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include<string.h>
+
+typedef struct Element Element;
+typedef struct List List;
+
+struct Element{
+    int number;
+    Element* next;
+};
+struct List{
+  Element* head;
+};
+
+List* initialization();
+void insertion(List*,int);
+void printList(List*);
+void deletion(List*);
+
+void deletion(List* myList){
+    if(myList == NULL){
+        exit(-1);
+    }
+    if(myList->head!=NULL){
+        Element *toDelete=myList->head;
+        myList->head=myList->head->next;
+        free(toDelete);
+    }
+}
+
+List* initialization(){
+    Element *newElement=malloc(sizeof(*newElement));
+    List *myList=malloc(sizeof(*myList));
+    newElement->number=0;
+    newElement->next=NULL;
+    myList->head=newElement;
+    return myList;
+}
+void insertion(List* myListe,int newNumber){
+    Element *newElement=malloc(sizeof(*newElement));
+    if(newElement == NULL || myListe == NULL ){
+        exit(-1);
+    }
+    newElement->number=newNumber;
+    newElement->next=myListe->head;
+    myListe->head=newElement;
+}
+void printList(List* myList){
+    if(myList == NULL){
+        exit(-1);
+    }
+    Element *current= myList->head;
+    while(current!=NULL){
+        printf("%d ->",current->number);
+        current=current->next;
+    }
+    printf("NULL\n");
+}
+
+int main(){
+    List *myListe=initialization();
+    insertion(myListe,1);
+    insertion(myListe,2);
+    insertion(myListe,3);
+    insertion(myListe,4);
+    deletion(myListe);
+    printList(myListe);
+
+}
+
+
+

@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+void fac(int *n);
+
+int main()
+{
+    int n;
+    printf("Enter n:");
+    scanf("%d",&n);
+    fac(&n);
+    printf("n:%d",n);
+}
+
+void fac(int *n){
+    int x= *n-1;
+    if(*n==0){
+         *n=1;
+    }
+    else{
+        fac(&x);
+        *n= *n * x;
+    }
+}

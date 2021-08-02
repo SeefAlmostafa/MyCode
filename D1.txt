@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+//Coding is hard :D
+
+int main(){
+    
+    char text[300];
+    char fileName[40];
+    
+    FILE *fp;
+    printf("Enter fileName:");
+    scanf("%s",fileName);
+    fp=fopen(fileName,"w");
+    
+    if(fp!=NULL){
+        printf("Write sth:");
+        scanf("%s",text);
+        fprintf(fp,"%s",text);
+    }
+    
+    else{
+      printf("%s can not be opened",fileName);
+      exit(-1);
+    }
+    
+    if(fclose(fp)==EOF){
+        printf("%s can not be closed",fileName);
+        exit(-1);
+    }
+    
+    fclose(fp);
+}
