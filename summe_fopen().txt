@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    int num,sum=0;
+    FILE *file = fopen("eingabe.txt","r");
+    FILE *fout = fopen("ausgabe.txt","w");
+    if(file!=NULL || fout!=NULL){
+       while( fscanf(file,"%d",&num)!=EOF){
+            sum+=num;
+       }
+    }
+    fprintf(fout,"Summe:%d",sum);
+    fclose(file);
+    fclose(fout);
+    return 0;
+}

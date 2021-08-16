@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct {
+int day;
+int month;
+int year;
+}date_t;
+
+// get a place for our Array in heap
+date_t* GetDateArray (int n)
+{
+    date_t *q= malloc(sizeof(date_t)*n);
+    for(int i=0;i<n;i++){
+        q[i].day=0;
+        q[i].month=0;
+        q[i].year=0;
+    }
+    return q;
+}
+
+int main (){
+    date_t *q;
+    int i = 0;
+    q = GetDateArray(10);
+    for ( i=0; i < 10; i++)
+    printf("Datum: %d.%d.%d\n", q[i].day, q[i].month,q[i].year);
+    free(q);
+    return 0;
+}

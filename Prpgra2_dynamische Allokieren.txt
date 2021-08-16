@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+float x;
+float y;
+} coordinate_t;
+
+coordinate_t * getCoordinateArray (int n)
+{
+    coordinate_t* q;
+    q=malloc(sizeof(coordinate_t)*n);
+    for(int i=0;i<n;i++){
+       q[i].x=0;
+       q[i].y=0;
+    }
+    return q;
+}
+
+int main ( void)
+{
+    coordinate_t * q;
+    int i = 0;
+    q = getCoordinateArray(10);
+    for ( i=0; i < 10; i++)
+    printf("(%f,%f)\n", q[i].x, q[i].y);
+    free(q);
+    return 0;
+}
