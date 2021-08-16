@@ -1,0 +1,115 @@
+
+(Aufgabe 1)
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    int zahlenArray[5]={5,2,4,1,3};
+    int laenge = sizeof(zahlenArray)/sizeof(zahlenArray[0]);
+    for(int i=1;i<laenge;i++){
+        int tmp=zahlenArray[i];
+        int j=i;
+        while(zahlenArray[j-1]>tmp && j>0){
+             zahlenArray[j]=zahlenArray[j-1];
+             j--;
+        }
+        zahlenArray[j]=tmp;
+    }
+    for(int i=0;i<laenge;i++){
+        printf("%d\n",zahlenArray[i]);
+    }
+
+}
+___________________________________________________________________________________________________
+(Aufgabe 1)(extra_Lösung)
+#include <stdio.h>
+#include <stdlib.h>
+
+void sortArray(int* ,int );
+int main(){
+    int zahlenArray[5]={5,2,4,1,3};
+    int laenge=5;
+    sortArray(zahlenArray,laenge);
+    for(int i=0;i<laenge;i++){
+        printf("%d\n",zahlenArray[i]);
+    }
+
+}
+void sortArray(int* arr,int len){
+   for(int i=1;i<len;i++){
+        int tmp=arr[i];
+        int j=i;
+        while(arr[j-1]>tmp && j>0){
+             arr[j]=arr[j-1];
+             j--;
+        }
+    arr[j]=tmp;
+    }
+}
+
+
+
+
+___________________________________________________________________________________________________
+(Aufgabe 2)(a-c)
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Dummy{
+int big;
+int length;
+};
+
+struct Dummy countBigAndLength(char*);
+
+int main(){
+
+    char text[]="Umwelt-Campus Birkenfeld";
+    struct Dummy erg=countBigAndLength(text);
+    printf("Anzahl grosse Buchstaben:%d\n",erg.big);
+    printf("Laenge des Textes %d",erg.length);
+    return 0;
+
+}
+
+struct Dummy countBigAndLength(char* text){
+    struct Dummy result;
+    result.length=0;
+    result.big=0;
+    for(int i=0;text[i]!='\0';i++){
+          result.length++;
+          if(text[i] >= 'A' && text[i] <='Z'){
+            result.big++;
+          }
+    }
+
+    return result;
+}
+_______________________________________________________________________________________________
+(Aufgabe 2)(d-e)
+#include <stdio.h>
+#include <stdlib.h>
+
+void countBigAndLength(char*,int*,int*);
+
+int main(){
+    int big,length;
+    char text[]="Umwelt-Campus Birkenfeld";
+    countBigAndLength(text,&big,&length);
+    printf("Anzahl grosse Buchstaben:%d\n",big);
+    printf("Laenge des Textes %d",length);
+    return 0;
+
+}
+void countBigAndLength(char* text,int *big,int *length){
+    *length=0;
+    *big=0;
+    for(int i=0;text[i]!='\0';i++){
+        (*length)++;
+        if(text[i] >= 'A' && text[i] <='Z'){
+            (*big)++;
+        }
+    }
+}
+
+_________________________________________________________________________________________________
