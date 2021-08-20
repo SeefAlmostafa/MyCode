@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int geradeZahlen(int[3][5],int,int);
+
+int main()
+{
+    int arr[3][5]={{2,4,3,16,12},
+                   {1,24,7,8,11},
+                   {8,2,18,30,1}};
+    int gerade=geradeZahlen(arr,3,5);
+    printf("Anzahl gerade Zahlen:%d",gerade);
+    return 0;
+}
+int geradeZahlen(int a[3][5],int Zeilen,int Spalten){
+    int counter=0;
+    for(int i=0;i<Zeilen;i++)
+    for(int j=0;j<Spalten;j++){
+        if(a[i][j]%2==0)
+            counter++;
+    }
+    return counter;
+}
