@@ -1,0 +1,109 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class AbstractEmployee{
+   virtual void AskForPromotion()=0;
+};
+
+class Employee:AbstractEmployee{
+    private:
+        string Company;
+        int Age;
+    protected:
+        string Name;
+    public:
+        void setName(string name){Name=name;}
+        string getName(){return Name;}
+        void setCompany(string company){Company=company;}
+        string getCompany(){return Company;}
+        void setAge(int age){
+            if(age>=18)
+                Age=age;
+        }
+        int getAge(){return Age;}
+        Employee(string name,string company,int age):Name(name),Company(company),Age(age){}
+        void intrdouceYourself(){
+            cout<<"Name:"<<Name<<endl;
+            cout<<"Company:"<<Company<<endl;
+            cout<<"age:"<<Age<<endl<<endl;
+        }
+        void AskForPromotion(){
+            if(Age>30)
+                cout<<Name<<" got promoted!"<<endl;
+            else
+                cout<<Name<<" Sorry No Promotion for You!"<<endl;
+
+        }
+        virtual void Work(){
+            cout<<Name<<" is checking email, task backlog, performing tasks..."<<endl;
+        }
+};
+
+class Developer: public Employee{
+public:
+    string favProgrammingLanguage;
+    Developer(string name,string company,int age,string fpl):Employee(name,company,age),favProgrammingLanguage(fpl){}
+    void fixBug(){
+        cout<<Name<<" fixed bug using "<<favProgrammingLanguage<<endl;
+    }
+    void Work(){
+        cout<<Name<<" is writing "<<favProgrammingLanguage<<" code"<<endl;
+    }
+
+};
+
+class Teacher:public Employee{
+public:
+    string Subject;
+    void PrepareLesson(){
+        cout<<Name<<" is preparing "<<Subject<<" lesson"<<endl;
+    }
+    Teacher(string name,string company,int age, string subject):Employee(name,company,age),Subject(subject){}
+    void Work(){
+        cout<<Name<<" is teaching "<<Subject<<endl;
+    }
+
+};
+int main(){
+
+   Employee employee1=Employee("seef","BMW",20);
+   Employee employee2=Employee("John","Amazon",33);
+   /*
+   employee1.AskForPromotion();
+   employee2.AskForPromotion();
+   */
+   /*
+   employee1.intrdouceYourself();
+   employee2.intrdouceYourself();
+   */
+
+   Developer d=Developer("seef","BMW",20,"C++");
+   /*
+   d.fixBug();
+   d.AskForPromotion();
+   */
+   Teacher t=Teacher("Jack","high School",35,"History");
+   /*
+   t.PrepareLesson();
+   t.AskForPromotion();
+   */
+
+   // Polymorphism
+   /*
+   d.Work();
+   t.Work();
+   */
+
+   // The most common use of polymorphism is when a
+   // parent class reference is used to refer to a child object
+   Employee *e1=&d;
+   Employee *e2=&t;
+
+   e1->Work();
+   e2->Work();
+
+}
