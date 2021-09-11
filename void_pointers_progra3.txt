@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string.h>
+#include <string>
+
+using namespace std;
+
+void print(void* ptr,char type){
+    switch(type){
+        case 'i':
+        case 'd':cout<<*((int*)ptr)<<endl;break;
+        case 'f':cout<<*((float*)ptr)<<endl;break;
+        case 'c':cout<<*((char*)ptr)<<endl;break;
+        case 's':cout<<*((string*)ptr)<<endl;break;
+        default:break;
+    }
+}
+
+int main()
+{
+    int num1=1;
+    char op='a';
+    float num2=1.5;
+    string text="test";
+
+    // -> void*_pointers return any data type
+
+    print(&num1,'i');
+    print(&op,'c');
+    print(&num2,'f');
+    print(&text,'s');
+
+	return 0;
+}

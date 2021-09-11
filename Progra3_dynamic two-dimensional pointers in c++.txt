@@ -1,0 +1,61 @@
+#include <iostream>
+
+using namespace std;
+
+
+int** createTable(int rows,int colm);
+void setTable(int** table ,int rows,int colm,int val);
+void printTable(int** table,int rows,int colm);
+void deleteTable(int** table,int rows);
+
+
+int main(){
+
+    int rows,colm,val=0;
+    cout<<"Enter rows number:";
+    cin>>rows;
+    cout<<"Enter columns number:";
+    cin>>colm;
+
+
+    int** table= createTable(rows,colm);
+    setTable(table,rows,colm,val);
+    printTable(table,rows,colm);
+    deleteTable(table,rows);
+
+    // we must delete or free the pointer 'n' times,
+    // depends on the pointer we declare -> in our case it is 2 times
+    delete[] table;
+    // We set tabel to null after removing its value,
+    // so the pointer variable dose not take a random position in the memory
+    table=NULL;
+}
+
+
+int** createTable(int rows,int colm){
+    int** table= new int*[rows];
+    for(int i=0;i<rows;i++){
+        table[i]= new int[colm];
+    }
+    return table;
+}
+void setTable(int** table ,int rows,int colm,int val){
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<colm;j++){
+            table[i][j]=val++;
+        }
+    }
+}
+void printTable(int** table,int rows,int colm){
+    for(int i=0;i<rows;i++){
+        cout<<"table["<<i+1<<"]:";
+        for(int j=0;j<colm;j++){
+            cout<<table[i][j]<<"   ";
+        }
+        cout<<endl;
+    }
+}
+void deleteTable(int** table,int rows){
+    for(int i=0;i<rows;i++)
+        delete[] table[i];
+}

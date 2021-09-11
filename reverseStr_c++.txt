@@ -1,0 +1,18 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void reverseStr(string& str){
+    int len=str.length();
+    for(int i=0;i<len/2;i++){
+        swap(str[i],str[len-i-1]);
+    }
+}
+
+int main(){
+    string text="Programmierung";
+    reverseStr(text);
+    cout<<text;
+    return 0;
+}
