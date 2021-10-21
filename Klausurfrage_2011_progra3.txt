@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// KlausurFrage 2011
+
+class Basis{
+private: int var_1;
+protected: int var_2;
+public: int var_3;
+};
+
+class Abgelitten : private Basis{
+ int f1() {return var_1;}  // (1) var_1 is wrong,-> var_1 is 'private' in 'Basis' class
+ int f2() {return var_2;}  // (2) var_2 is right
+ int f3() {return var_3;}  // (3) var_3 is right
+};
+
+
+int main(){
+    int i;
+    Abgelitten a;
+    Basis b;
+    i = a.var_3;   // (4) wrong, -> The Object 'a' will take all the attributes of 'Basis' as 'private'
+    i = b.var_3;  // (5) right
+    b = a;       // (6) wrong, -> The relation between 'Basis' and  'Abgelitten' is not known for the main()
+                // to solve the Problem ->  class Abgelitten : public Basis
+}
