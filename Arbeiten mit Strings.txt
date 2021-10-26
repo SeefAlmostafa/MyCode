@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+void inc5r(int &valr)   // erwartet eine
+{                       // Referenz auf int
+  valr += 5;
+}
+
+
+int main()
+{
+	cout << "Arbeiten mit Strings" << endl;
+	cout << "====================" << endl;
+	string s;
+	cout << "Bitte Namen eingeben: " << endl;
+	getline(cin,s);
+	cout << "Hallo" << s << endl << endl;
+
+	string s1="Hallo Welt";
+	cout << "s1 = " << s1 << endl;
+	cout << "s1 Laenge: " << s1.length() << endl;
+	s1.append("!");
+	cout << "s1 = " << s1 << endl;
+	cout << "s1 Laenge: " << s1.length() << endl << endl;
+    cout << "Quadratzahlberechnung" << endl;
+	cout << "=====================" << endl;
+	int i;
+	cout << "Bitte Zahl x eingeben: ";
+	cin >> i;
+	cout << "x^2 = " << i*i << endl << endl;
+
+	cout << "For-Schleife" << endl;
+	cout << "============" << endl;
+	register int j;
+	for (j = 0; j < 20; j++)
+		cout << j << ". Durchlauf: j=" << j << endl << endl;
+
+
+	system("Pause");
+
+
+	return 0;
+}
