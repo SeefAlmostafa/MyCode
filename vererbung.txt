@@ -1,0 +1,84 @@
+using namespace std;
+#include <iostream>
+#include <string>
+
+// Oberklasse
+class Person{
+private:
+    string vorname;
+    unsigned int alter;
+    string name;
+public:
+    Person(string v,unsigned int a,string n):vorname(v),alter(a),name(n){}
+    void set_name(string n){name=n;}
+    string get_name(){return name;}
+    void set_vorname(string v){vorname=v;}
+    string get_vorname(){return vorname;}
+    void set_alter(unsigned int a){alter=a;}
+    unsigned int get_alter(){return alter;}
+};
+
+// Unterklasse 1
+class Dozent:public Person{
+private:
+    unsigned int personalNummer;
+public:
+    Dozent(Person dozent,unsigned int PersNr):Person(dozent),personalNummer(PersNr){}
+    void show(){
+        cout<<"DozentPersonalNummer:"<<this->personalNummer<<endl;
+        cout<<"DozentVorname:"<<this->get_vorname()<<endl;
+        cout<<"DozentName:"<<this->get_name()<<endl;
+        cout<<"DozentAlter:"<<this->get_alter()<<endl<<endl;
+    }
+};
+
+
+// Unterklasse 2
+class Student:public Person{
+private:
+    unsigned int matrNr;
+public:
+    Student(Person student,unsigned int  mNr):Person(student),matrNr(mNr){}
+        void show(){
+        cout<<"StudentMatrNummer:"<<this->matrNr<<endl;
+        cout<<"StudentVorname:"<<this->get_vorname()<<endl;
+        cout<<"StudentName:"<<this->get_name()<<endl;
+        cout<<"StudentAlter:"<<this->get_alter()<<endl<<endl;
+    }
+};
+
+
+// Unterklasse 3
+class Kunde:public Person{
+private:
+    unsigned int KundenNr;
+public:
+    Kunde(Person kunde,unsigned int KdNr):Person(kunde),KundenNr(KdNr){}
+
+        void show(){
+        cout<<"KundenNummer:"<<this->KundenNr<<endl;
+        cout<<"KundenVorname:"<<this->get_vorname()<<endl;
+        cout<<"KundenName:"<<this->get_name()<<endl;
+        cout<<"KundenAlter:"<<this->get_alter()<<endl<<endl;
+    }
+};
+
+
+
+int main(){
+
+    // constructor
+    Person Schwinn("Markus",37,"Schwinn");
+    Person Seef("Seef",25,"Almostafa");
+    Person Alex("Alexander",34,"ulreih");
+
+    // Objects
+    Dozent schwinn(Schwinn,1233);
+    Student seef(Seef,5433);
+    Kunde alex(Alex,4353);
+
+    // polymorphism
+    schwinn.show();
+    seef.show();
+    alex.show();
+}

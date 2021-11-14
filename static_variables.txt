@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+class First{
+public:
+    static int counter;
+    First(){counter++;}
+    static int getCounter() {return counter;}
+};
+int First::counter=0; // you can install only static variables like this
+int main(){
+    First a;
+    First b;
+    First c[60];
+    cout<<a.getCounter()<<endl;     // Output is 62
+    // cout<<b.getCounter()<<endl;  // Output is 62
+    // cout<<c->getCounter()<<endl;  // Output is 62
+}
+
