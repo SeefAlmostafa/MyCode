@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+class First{
+public:
+    static int counter;
+    First(){counter++;}
+    static int getCounter() {return counter;}
+};
+int First::counter=0; // you can install only static variables like this
+int main(){
+/*
+    First a;
+    First b;
+    First c[60];
+    cout<<First::getCounter()<<endl;  // Output is 62
+*/
+
+    // We made the getCounter() a general function for all objects
+    cout<<First::getCounter()<<endl;  
+    // Output is 0 because we don't have objects in the main function yet
+}
+

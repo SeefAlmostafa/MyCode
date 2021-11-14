@@ -1,0 +1,73 @@
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Data{
+private:
+    string name;
+    string vorname;
+    string adresse;
+    int matrNr;
+public:
+       // Con
+        Data(string name,string vorname,string adresse,int matrNr){
+            this->name=name;
+            this->vorname=vorname;
+            this->adresse=adresse;
+            this->matrNr=matrNr;
+        }
+        // Setter und Getter
+        void set_name(string name){this->name=name;}
+        void set_vorname(string vorname){this->vorname=vorname;}
+        void set_adresse(string adresse){this->adresse=adresse;}
+        void set_matrNr(int matrNr){this->matrNr=matrNr;}
+        string get_name(){return this->name;}
+        string get_vorname(){return this->vorname;}
+        string get_adresse(){return this->adresse;}
+        int get_matrNr(){return this->matrNr;}
+};
+
+class Uni{
+private:
+    string uniName;
+    string uniAdresse;
+public:
+     // Con
+      Uni(string uniName,string uniAdresse){
+          this->uniName=uniName;
+          this->uniAdresse=uniAdresse;
+      }
+      // Setter und Getter
+      void set_uniName(string uniname){this->uniName=uniname;}
+      void set_uniAdresse(string uniadresse){this->uniAdresse=uniadresse;}
+      string get_uniName(){return this->uniName;}
+      string get_uniAdresse(){return this->uniAdresse;}
+};
+
+class Student{
+private:
+    Data studentData; //  compisition
+    Uni studentUni;
+public:
+    // Con
+    Student(Data data,Uni uni):studentData(data),studentUni(uni){}
+    
+    
+    void showInfo(){
+        cout<<"MatrNr:"<<studentData.get_matrNr()<<endl;
+        cout<<"Vorname:"<<studentData.get_vorname()<<endl;
+        cout<<"Name:"<<studentData.get_name()<<endl;
+        cout<<"Adresse:"<<studentData.get_adresse()<<endl;
+        cout<<"Uni Name:"<<studentUni.get_uniName()<<endl;
+        cout<<"Uni Adresse:"<<studentUni.get_uniAdresse()<<endl;
+    }
+};
+
+
+int main(){
+    Data SeefData("Almostafa","Seef","Bahnhofstrasse 45",123); // (1) Klasse
+    Uni SeefUni("Hochschule Trier","umweltstrasse 32");        // (2) Klasse
+    Student seef(SeefData,SeefUni); // (3) KLasse
+    seef.showInfo(); // Methode aus Student-Klasse
+}
