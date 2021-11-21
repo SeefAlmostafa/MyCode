@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+template <class first,class second>
+
+first smaller(first a,second b){
+    return (a<b ? a : b);
+}
+
+int main()
+{
+    int x=10;
+    double y=9.99;
+    cout<<smaller(x,y)<<endl; //9
+    cout<<smaller(y,x)<<endl; //9.99
+    //cout<<smaller<double>(x,y)<<endl;
+    //cout<<smaller<double,int>(x,y)<<endl;
+}

@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+template <class Char>
+
+
+class Character{
+public:
+    Character(Char c){
+        cout<<c<<" is not a Character"<<endl;
+    }
+};
+
+
+template <> // Template specialization
+class Character<char>{
+public:
+    Character(char c){
+        cout<<c<<" is a Character"<<endl;
+    }
+};
+
+
+int main()
+{
+    Character<int>obj1(7);
+    Character<double>obj2(5.5);
+    Character<char>obj3('A');
+}
+
+/*
+
+7 is not a Character
+5.5 is not a Character
+A is a Character
+
+*/
+

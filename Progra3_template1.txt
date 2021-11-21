@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+template <class N>
+
+class number{
+N num1,num2;
+public:
+    number(N x, N y){
+        num1 = x;
+        num2 = y;
+    }
+    N Max();
+};
+template <class N>
+N number<N>::Max(){
+    return (num1>num2 ? num1 : num2);
+}
+
+int main()
+{
+    number<int> x(10,20);
+    cout<<x.Max()<<endl;
+}
