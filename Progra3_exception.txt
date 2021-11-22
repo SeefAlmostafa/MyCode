@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+#include <string>
+
+int main(){
+    try{
+        int arr[]={1,2,3,4,5,6,7,8,9,10};
+        int index;
+        cout<<"Enter an index:";
+        cin>>index;
+        if(index < 0 ){
+            throw "is a negative number";
+        }
+        if(index >=10 ){
+            throw index;
+        }
+
+        cout<<"Right answer"<<endl;
+        for(int i=0;i<index;i++){
+            cout<<arr[i]<<"\t";
+        }
+    }
+
+    // terminate called after throwing an instance of 'char const*'
+    // to solve the problem put const before the char* str
+    catch( const char* str){
+        cout<<"Exception: "<<str<<endl;
+    }
+    catch(int index){
+        cerr<<index<<" is out of range"<<endl;
+    }
+
+}

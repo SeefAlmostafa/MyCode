@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+#define max_size 100
+
+class Exception{
+private:
+    int arr[max_size];
+    void init_arr(){for(int i=0;i<max_size;i++){this->arr[i] = i;}}
+
+public:
+    Exception(){this->init_arr();}
+    int getValue(int i)const{return arr[i];}
+    int getElement(int x)const{
+        if(x<0)
+            throw xSmall();
+        else if(x >= max_size)
+            throw xBig();
+        else
+            return getValue(x);
+    }
+
+    class xBig{
+        public:
+        xBig(){}
+        void big(){cout<<"Big"<<endl;}
+    };
+
+    class xSmall{
+        public:
+        xSmall(){}
+        void small(){cout<<"Small"<<endl;}
+    };
+};
+
+int main(){
+    int i;
+
+    Exception test;
+    try{
+        cout<<"Enter an index:";
+        cin>>i;
+        cout<<"The Element:\t"<<test.getElement(i)<<endl;
+    }
+
+    catch(Exception::xBig is){
+        is.big();
+    }
+
+    catch(Exception::xSmall is){
+        is.small();
+    }
+
+    return 0;
+}
