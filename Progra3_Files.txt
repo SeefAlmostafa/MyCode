@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+#include <fstream>
+
+int main(){
+
+/*
+    ofstream file("myFile.txt");
+    if(file.is_open())
+        cout<<" it is open"<<endl;
+    else
+        cout<<" it is close"<<endl;
+
+    file<<"Personal information"<<endl;
+    file.close();
+*/
+    ofstream data("data.txt");
+    string name;
+
+    // press STRG+Z to exit loop
+    while(cin>>name){
+        data<<name<<endl;
+    }
+}
