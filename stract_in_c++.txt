@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+#include <string.h>
+
+class Student {
+    static int counter;
+    char name[20];
+    unsigned int ID;
+public:
+    Student();
+    static void print_count();
+
+};
+
+int Student::counter = 0;
+
+void Student::print_count(){
+    cout<<"Students constructed:"<<counter<<endl;
+}
+
+Student::Student(){
+    strcpy(name," ");
+    ID = 0;
+    counter++;
+    print_count();
+}
+
+
+int main()
+{
+    Student S1,S2;
+    Student St[3];
+    cout<<"\n";
+
+    // calling the function without any object
+    Student::print_count(); // ok with stract datatyp
+
+    return 0;
+}

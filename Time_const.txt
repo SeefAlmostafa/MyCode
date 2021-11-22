@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+#include <cstdlib>
+
+class Time{
+private:
+     int hour,minute;
+public:
+    Time(int hour, int minute);
+    void printTime()const;
+};
+
+Time::Time(int h,int m){
+    hour = abs(h);
+    minute = abs(m);
+}
+void Time::printTime()const{
+    cout<<"Time:"<<hour<<":"<<minute<<endl;
+}
+
+int main()
+{
+    // normal objects can access any function
+    Time noon(12,30);
+    noon.printTime();
+
+    // const objects can access only const functions
+    const Time morning(07,30);
+    morning.printTime();
+
+    return 0;
+}

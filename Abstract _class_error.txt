@@ -1,0 +1,22 @@
+using namespace std;
+#include <iostream>
+
+
+class L {
+public:
+    virtual char letter() = 0;
+
+};
+
+class A : public L {
+public:
+    //char letter(){return 'a';}
+};
+
+
+int main(){
+
+    A a; // You can not declare a without implementing the virtual funciton letter() in A-class
+    cout<<"a.letter():"<<a.letter()<<endl;
+
+}

@@ -1,0 +1,35 @@
+using namespace std;
+#include <iostream>
+
+
+class L {
+public:
+    virtual char letter() = 0;
+    virtual int number() = 0;
+};
+
+class A : public L {
+public:
+    char letter(){return 'a';}
+    int number(){return 1;}
+};
+
+class B:public L {
+public:
+    char letter(){return 'b';}
+    int number(){return 2;}
+};
+
+int main(){
+    //L l; // error
+    B b;
+    A a;
+    cout<<"a.letter():"<<a.letter()<<endl;
+    cout<<"a.letter():"<<b.letter()<<endl;
+    L* ptr;
+    ptr = &a;
+
+    cout<<"ptr->number():"<<ptr->number()<<endl;
+    ptr = &b;
+    cout<<"ptr->number():"<<ptr->number()<<endl;
+}
