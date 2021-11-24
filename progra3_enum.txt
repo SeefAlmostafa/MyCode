@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+      // 0       1           2         3
+enum {ledig,verheiratet,geschieden,hat_kinder}; // enum ohne Namen
+
+class Person {
+private:
+    string name;
+    int id;
+    int steuerKlasse;
+public:
+   // friend bool singleTest(Person);
+    Person(string name = "",int id = 0,int steuerKlasse = -1 );
+    void setName(const string);
+    void setId(const int);
+    void setSteuerKlasse(const int);
+    void init(string,int,int);
+    string getName()const;
+    int getSteuerKlasse()const;
+    int getId()const;
+    void print();
+};
+
+Person::Person(string name,int id,int steuerKlasse){
+    this->name = name;
+    this->id = id;
+    this->steuerKlasse = steuerKlasse;
+}
+
+void Person::setName(const string name){
+        this->name = name;
+}
+
+void Person::setId(const int id){
+    this->id = id;
+}
+
+string Person::getName()const{
+    return this->name;
+}
+
+int Person::getId()const{
+    return this->id;
+}
+void Person::print(){
+    cout<<"Name:"<<getName()<<"\t"
+        <<"ID: "<<getId()<<"\t"
+        <<"steuerklasse: "<<getSteuerKlasse()<<"\t"
+    <<endl;
+}
+
+void Person::init(string name,int id, int steuerKlasse){
+    this->name = name;
+    this->id = id;
+    this->steuerKlasse = steuerKlasse;
+}
+
+void Person::setSteuerKlasse(const int steuerKlasse){
+    this->steuerKlasse = steuerKlasse;
+}
+int Person::getSteuerKlasse()const{
+    return this->steuerKlasse;
+}
+
+int main(){
+
+    // zwei Personen erzeugen
+    Person p1("Seef",2432,ledig);
+    Person p2("Mohammed",3534,hat_kinder);
+
+    // Vorher
+    p1.print();
+
+    // Nachher
+    p1.init("Ahmed",3254,verheiratet); // in Datenbanken bezeichnet man das mit Update
+    p1.print();
+
+    // ist p1 single ?
+    if (singleTest(p1) == 1)
+        cout<<"40% vom Gehalt soll abgezogen !"<<endl;
+    else
+        cout<<"Die Person ist nicht ledig deshalb 20% abzug!"<<endl;
+
+}
+
+
