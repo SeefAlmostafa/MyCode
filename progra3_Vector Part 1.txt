@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void print(vector<int>v,int l){
+    for(int i=0;i<l;i++){
+        cout<<v[i]<<" ";
+    }
+    l=0;
+    cout<<"\n";
+}
+
+int main()
+{
+    vector <int> v = {1,2,3,4,5,6,7,8,9};
+
+    v.push_back(10);
+    v.push_back(11);
+    v.push_back(12);
+    v.pop_back();
+
+    cout<<"v[5]:"<<v.at(5)<<endl; // 6
+
+    int l = v.size();
+    print(v,l);
+
+    // coping by the Constructre the vector v
+    vector <int> s(v);
+    l = s.size();
+
+    print(s,l);
+
+    //s.clear(); // delete everthing
+    //cout<<s.empty(); // 1, s is empty due to clear()
+
+    //cout<<s.front()<<endl;  // 1
+    //cout<<s.back()<<endl;   // 11
+
+    vector<int> a(12,0); // 0 0 0 0 0 0 0 0 0 0 0 0
+    vector<int> b(12,1); // 1 1 1 1 1 1 1 1 1 1 1 1
+    l = a.size(); // 12
+    int f = b.size(); // 12
+    a.swap(b); // swap a and b
+    print(a,l); // 1 1 1 1 1 1 1 1 1 1 1 1 // this is a now
+    print(b,f); // 0 0 0 0 0 0 0 0 0 0 0 0 // this is b now
+
+    // cout<<s.max_size(); // show the max size in byte
+
+    // diffrence betwenn size and capacity
+    a.push_back(5);
+    cout<<a.size()<<endl;     // length is 13
+    cout<<a.capacity()<<endl; // capacity is 24
+
+/*
+    Notice: once you overpush a new value to the vector,
+    the old vector will be deleted and would create new vector
+    with 100% capacity, which means if the old size was 12
+    the capacity would be 24, and so on the new size 13
+*/
+
+}
